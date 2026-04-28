@@ -1,1 +1,191 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arafat — CRO Developer</title>
+  <meta name="description" content="AB test developer specialising in client-side experimentation. 5+ years building enterprise-grade tests for leading CRO agencies and brands.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg: #0c0c0c; --bg-2: #141414; --bg-3: #1e1e1e; --border: #282828; --border2: #333; --white: #f8f8f8; --off: #c8c8c8; --muted: #888; --dim: #444; --mono: 'DM Mono', monospace; --serif: 'Libre Baskerville', serif; --sans: 'DM Sans', sans-serif; --display: 'Bebas Neue', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--white); font-family: var(--sans); font-size: 16px; line-height: 1.7; font-weight: 300; overflow-x: hidden; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2.5rem; border-bottom: 1px solid var(--border); background: var(--bg); }
+    .nav-logo { font-family: var(--display); font-size: 1.4rem; letter-spacing: 0.08em; color: var(--white); text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-link { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; color: var(--muted); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+    .nav-link:hover { color: var(--white); }
+    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 2.5rem; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    .hero-bg { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-family: var(--display); font-size: clamp(18rem,38vw,44rem); letter-spacing: -0.02em; color: transparent; -webkit-text-stroke: 1px var(--border); line-height: 1; pointer-events: none; user-select: none; white-space: nowrap; }
+    .hero-content { position: relative; z-index: 2; padding-top: 8rem; }
+    .hero-eyebrow { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+    .eyebrow-tag { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+    .eyebrow-line { width: 48px; height: 1px; background: var(--dim); }
+    h1 { font-family: var(--display); font-size: clamp(6rem,16vw,15rem); letter-spacing: 0.02em; line-height: 0.88; color: var(--white); }
+    .hero-sub { font-family: var(--serif); font-style: italic; font-size: clamp(1.2rem,2.5vw,1.8rem); color: var(--muted); font-weight: 400; margin-top: 1.5rem; max-width: 560px; line-height: 1.5; }
+    .hero-footer { display: grid; grid-template-columns: repeat(4,1fr); border-top: 1px solid var(--border); margin-top: 4rem; position: relative; z-index: 2; }
+    .hf-item { padding: 1.25rem 1.5rem 1.25rem 0; border-right: 1px solid var(--border); }
+    .hf-item:last-child { border-right: none; }
+    .hf-l { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); margin-bottom: 4px; }
+    .hf-v { font-size: 0.9rem; font-weight: 500; color: var(--off); }
+    .about-band { display: grid; grid-template-columns: 1fr 1.6fr; border-bottom: 1px solid var(--border); }
+    .about-left { padding: 4rem 2.5rem; border-right: 1px solid var(--border); display: flex; flex-direction: column; justify-content: space-between; }
+    .about-label { font-family: var(--display); font-size: 5rem; letter-spacing: 0.04em; color: var(--border2); line-height: 1; margin-bottom: 2rem; }
+    .skills-list { list-style: none; border: 1px solid var(--border); }
+    .skill-item { display: flex; justify-content: space-between; align-items: center; padding: 0.875rem 1rem; border-bottom: 1px solid var(--border); font-family: var(--mono); font-size: 0.72rem; color: var(--muted); transition: background 0.15s, color 0.15s; }
+    .skill-item:last-child { border-bottom: none; }
+    .skill-item:hover { background: var(--bg-2); color: var(--off); }
+    .skill-dot { width: 5px; height: 5px; background: var(--border2); border-radius: 50%; }
+    .about-right { padding: 4rem 2.5rem; }
+    .about-right p { font-family: var(--serif); font-size: 1.15rem; line-height: 1.8; color: var(--off); margin-bottom: 1.5rem; }
+    .about-right p:last-child { margin-bottom: 0; }
+    .about-right em { font-style: italic; color: var(--white); }
+    .about-right p.small { font-family: var(--sans); font-size: 0.9rem; color: var(--muted); font-style: normal; }
+    .work-header { display: flex; justify-content: space-between; align-items: baseline; padding: 2rem 2.5rem; border-bottom: 1px solid var(--border); }
+    .work-title { font-family: var(--display); font-size: 3.5rem; letter-spacing: 0.06em; color: var(--white); }
+    .work-count { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em; color: var(--dim); text-transform: uppercase; }
+    .case-card { display: grid; grid-template-columns: 1fr auto; align-items: end; padding: 3rem 2.5rem; border-bottom: 1px solid var(--border); text-decoration: none; position: relative; overflow: hidden; }
+    .case-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--bg-2); transition: width 0.3s ease; z-index: 0; }
+    .case-card:hover::before { width: 100%; }
+    .case-card > * { position: relative; z-index: 1; }
+    .case-meta { display: flex; gap: 1.5rem; align-items: center; margin-bottom: 1rem; }
+    .case-tag { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); }
+    .case-tag-sep { width: 1px; height: 12px; background: var(--border2); }
+    .case-name { font-family: var(--display); font-size: clamp(2.5rem,6vw,5rem); letter-spacing: 0.04em; color: var(--white); line-height: 0.9; margin-bottom: 0.75rem; }
+    .case-desc { font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--muted); max-width: 500px; line-height: 1.6; }
+    .case-arrow { font-family: var(--display); font-size: 3rem; color: var(--border2); transition: color 0.2s, transform 0.2s; align-self: center; }
+    .case-card:hover .case-arrow { color: var(--white); transform: translateX(6px); }
+    .case-card.soon { cursor: default; }
+    .case-card.soon::before { display: none; }
+    .case-card.soon .case-name { color: var(--border2); }
+    .case-card.soon .case-desc { color: var(--dim); }
+    .soon-badge { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); border: 1px solid var(--border2); padding: 3px 8px; display: inline-block; margin-top: 1rem; }
+    .contact-band { padding: 5rem 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; border-bottom: 1px solid var(--border); }
+    .contact-heading { font-family: var(--display); font-size: clamp(3rem,7vw,6rem); letter-spacing: 0.04em; color: var(--white); line-height: 0.95; }
+    .contact-heading span { display: block; color: var(--dim); }
+    .contact-right p { font-family: var(--serif); font-size: 1.05rem; color: var(--muted); line-height: 1.75; margin-bottom: 2rem; font-style: italic; }
+    .contact-email { display: inline-block; font-family: var(--display); font-size: 1.4rem; letter-spacing: 0.08em; color: var(--white); text-decoration: none; border-bottom: 1px solid var(--border2); padding-bottom: 4px; transition: border-color 0.2s; }
+    .contact-email:hover { border-color: var(--white); }
+    .site-footer { padding: 2rem 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .footer-copy { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; color: var(--dim); text-transform: uppercase; }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-link { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; color: var(--dim); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+    .footer-link:hover { color: var(--muted); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-eyebrow { animation: fadeUp 0.6s ease both; }
+    h1 { animation: fadeUp 0.6s 0.08s ease both; }
+    .hero-sub { animation: fadeUp 0.6s 0.14s ease both; }
+    .hero-footer { animation: fadeUp 0.6s 0.2s ease both; }
+    @media (max-width: 860px) {
+      nav, .hero { padding-left: 1.5rem; padding-right: 1.5rem; }
+      h1 { font-size: 22vw; }
+      .hero-footer { grid-template-columns: repeat(2,1fr); }
+      .about-band { grid-template-columns: 1fr; }
+      .about-left { border-right: none; border-bottom: 1px solid var(--border); }
+      .work-header, .case-card, .contact-band { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .contact-band { grid-template-columns: 1fr; gap: 2rem; }
+      .site-footer { flex-direction: column; gap: 1rem; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/">ARAFAT</a>
+  <div class="nav-links">
+    <a class="nav-link" href="#work">Work</a>
+    <a class="nav-link" href="#about">About</a>
+    <a class="nav-link" href="#contact">Contact</a>
+  </div>
+</nav>
+<section class="hero">
+  <div class="hero-bg">CRO</div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-tag">AB Test Developer</span>
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-tag">Available for projects</span>
+    </div>
+    <h1>ARAFAT</h1>
+    <p class="hero-sub">Building enterprise-grade AB tests that <em>actually ship</em> — client-side JS, CSS, any platform.</p>
+  </div>
+  <div class="hero-footer">
+    <div class="hf-item"><div class="hf-l">Experience</div><div class="hf-v">5+ years</div></div>
+    <div class="hf-item"><div class="hf-l">Speciality</div><div class="hf-v">AB Test Dev</div></div>
+    <div class="hf-item"><div class="hf-l">Stack</div><div class="hf-v">JS · CSS · SCSS</div></div>
+    <div class="hf-item"><div class="hf-l">Based in</div><div class="hf-v">Bangladesh</div></div>
+  </div>
+</section>
+<section class="about-band" id="about">
+  <div class="about-left">
+    <div class="about-label">WHAT<br>I DO</div>
+    <ul class="skills-list">
+      <li class="skill-item">Optimizely Web <span class="skill-dot"></span></li>
+      <li class="skill-item">VWO <span class="skill-dot"></span></li>
+      <li class="skill-item">AB Tasty <span class="skill-dot"></span></li>
+      <li class="skill-item">Convert.com <span class="skill-dot"></span></li>
+      <li class="skill-item">GA4 + Tealium tracking <span class="skill-dot"></span></li>
+      <li class="skill-item">SPA / Next.js aware builds <span class="skill-dot"></span></li>
+      <li class="skill-item">Keyboard accessibility <span class="skill-dot"></span></li>
+      <li class="skill-item">White-label for agencies <span class="skill-dot"></span></li>
+    </ul>
+  </div>
+  <div class="about-right">
+    <p>I build AB tests for CRO agencies and direct brands — the kind of tests that survive SPA navigation, dual-fire analytics platforms, and enterprise QA without breaking a sweat.</p>
+    <p>Five years of client-side experimentation means I have solved the hard problems: <em>race conditions on Next.js storefronts, suppressing native dropdowns without touching core platform code, debounced API calls that do not flood at scale.</em></p>
+    <p>I work as a silent technical partner for agencies who need reliable dev capacity. Your clients see the results. You get the credit. The code just works.</p>
+    <p class="small">Open to white-label partnerships with CRO agencies and direct retainers with eCommerce brands. Drop me a line.</p>
+  </div>
+</section>
+<section id="work">
+  <div class="work-header">
+    <div class="work-title">SELECTED WORK</div>
+    <div class="work-count">Case studies</div>
+  </div>
+  <a class="case-card" href="screwfix-case-study.html">
+    <div>
+      <div class="case-meta">
+        <span class="case-tag">Retail</span><div class="case-tag-sep"></div>
+        <span class="case-tag">SCR278</span><div class="case-tag-sep"></div>
+        <span class="case-tag">Optimizely + GA4</span>
+      </div>
+      <div class="case-name">SCREWFIX</div>
+      <div class="case-desc">Desktop search immersive UI — a 3-variant test redesigning the search overlay on a Next.js storefront, targeting a £1.23m annual revenue opportunity.</div>
+    </div>
+    <div class="case-arrow">→</div>
+  </a>
+  <div class="case-card soon">
+    <div>
+      <div class="case-meta"><span class="case-tag">eCommerce</span><div class="case-tag-sep"></div><span class="case-tag">Coming soon</span></div>
+      <div class="case-name">CASE STUDY 02</div>
+      <div class="case-desc">Next case study in preparation.</div>
+      <div class="soon-badge">Publishing soon</div>
+    </div>
+  </div>
+  <div class="case-card soon">
+    <div>
+      <div class="case-meta"><span class="case-tag">SaaS / Lead gen</span><div class="case-tag-sep"></div><span class="case-tag">Coming soon</span></div>
+      <div class="case-name">CASE STUDY 03</div>
+      <div class="case-desc">More work being documented and prepared for publication.</div>
+      <div class="soon-badge">Publishing soon</div>
+    </div>
+  </div>
+</section>
+<section class="contact-band" id="contact">
+  <div class="contact-heading">LET'S<br>WORK<br><span>TOGETHER</span></div>
+  <div class="contact-right">
+    <p>Looking for a reliable AB test developer for white-label work, or want to discuss a direct retainer? I am currently taking on new clients.</p>
+    <a class="contact-email" href="mailto:hello@arafatcro.dev">hello@arafatcro.dev</a>
+  </div>
+</section>
+<footer class="site-footer">
+  <div class="footer-copy">© 2026 Arafat · CRO Developer</div>
+  <div class="footer-links">
+    <a class="footer-link" href="https://linkedin.com/in/" target="_blank">LinkedIn</a>
+    <a class="footer-link" href="https://github.com/maaislam" target="_blank">GitHub</a>
+    <a class="footer-link" href="mailto:hello@arafatcro.dev">Email</a>
+  </div>
+</footer>
+</body>
+</html>
