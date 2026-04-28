@@ -1,0 +1,9 @@
+@use '../abstracts/variables' as *;
+
+.site-footer {
+  margin-top: $space-10;
+  padding-block: $space-6;
+  border-top: 1px solid $color-border;
+  color: $color-text-dim;
+  font-size: $fs-sm;
+}

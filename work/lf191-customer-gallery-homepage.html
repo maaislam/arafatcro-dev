@@ -1,0 +1,359 @@
+<!--
+  LF191 — Customer Gallery Homepage Integration
+  Image paths: /work/lf191/[image].png
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+    <title>LF191 — Customer gallery homepage integration | Arafat</title>
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com" />
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" />
+    <script type="module"
+            src="/src/scripts/main.js"></script>
+</head>
+
+<body class="case-study">
+    <header class="site-header">
+        <div class="container site-header__inner">
+            <a href="/"
+               class="site-header__logo">Arafat</a>
+            <nav class="site-header__nav"
+                 aria-label="Primary">
+                <a href="/#work">Work</a>
+                <a href="/#how-i-work">How I work</a>
+                <a href="/#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="case-study__main">
+        <div class="container">
+            <a href="/#work"
+               class="case-study__back">← Back to all work</a>
+
+            <header class="case-study__header">
+                <div class="case-study__meta">
+                    <span class="case-study__id">LF191</span>
+                    <span class="case-study__platform">Convert.com</span>
+                    <span class="case-study__client-tag">UK luxury flooring retailer (Magento)</span>
+                </div>
+                <h1>Customer gallery homepage integration</h1>
+                <p class="case-study__lede">A homepage experiment that live-fetches the host's customer gallery, injects
+                    it into the page, and turns each image into a product modal with inline AJAX sample ordering — built
+                    without static content duplication, working with Magento's native cart and notification system.</p>
+            </header>
+
+            <figure class="case-study__hero-image">
+                <img src="/work/lf191/hero-gallery.png"
+                     alt="Customer gallery section embedded on the homepage with eight room photos and a View Customer Gallery button"
+                     loading="lazy" />
+            </figure>
+
+            <section class="case-study__section">
+                <h2>The problem</h2>
+                <p>The customer gallery — real photos of installed flooring in customers' homes — was strong social
+                    proof, but it sat on a separate <code>/customer-gallery</code> page that most homepage visitors
+                    never reached. The asset was doing its job for users who navigated to it, but the navigation step
+                    itself was the barrier. The hypothesis was that surfacing this content directly on the homepage
+                    would build trust earlier in the journey and increase engagement with the high-intent "Order a Free
+                    Sample" flow.</p>
+            </section>
+
+            <section class="case-study__section">
+                <h2>The hypothesis</h2>
+                <blockquote class="case-study__quote">
+                    Visitors who see real customer installs on the homepage are more likely to trust the brand, explore
+                    products, and convert — particularly via the high-intent "Order a Free Sample" flow. Bringing the
+                    gallery in-page removes a navigation barrier and increases engagement with social proof earlier in
+                    the journey.
+                </blockquote>
+            </section>
+
+            <section class="case-study__section">
+                <h2>The solution</h2>
+                <p>The experiment makes six coordinated changes on the homepage:</p>
+                <ul class="case-study__list">
+                    <li><strong>Gallery injection</strong> — live-fetch the customer gallery page, parse it, inject the
+                        gallery section directly into the homepage</li>
+                    <li><strong>Progressive reveal</strong> — show 8 items initially, with a "View Customer Gallery"
+                        button expanding the full grid</li>
+                    <li><strong>Product modal</strong> — click any gallery image to open a modal showing the product
+                        name, SKU, flooring type, thumbnail, and CTAs</li>
+                    <li><strong>Inline AJAX sample ordering</strong> — "Order a Free Sample" adds to cart without page
+                        navigation, with success/error/sample-limit handling</li>
+                    <li><strong>About Us refresh</strong> — moved to the bottom of the page with updated copy and
+                        imagery aligned to the new brand narrative</li>
+                    <li><strong>Press features strip</strong> — new "As Seen On" logo strip above the existing one, with
+                        the original hidden to avoid duplication</li>
+                </ul>
+            </section>
+
+            <figure class="case-study__figure">
+                <img src="/work/lf191/gallery-section.png"
+                     alt="Customer gallery rendered on the homepage with one large featured image and seven smaller thumbnails in a grid"
+                     loading="lazy" />
+                <figcaption>Live-fetched gallery rendered below the USP bar, 8 items shown initially</figcaption>
+            </figure>
+
+            <section class="case-study__section">
+                <h2>Implementation</h2>
+                <p>Three engineering decisions shaped the build: live cross-page DOM fetching to avoid maintaining a
+                    static content copy, scraping product form data from PDPs to power AJAX sample submissions through
+                    Magento's native cart, and cloning the host's existing success/error notifications rather than
+                    building a custom toast system.</p>
+                <p>Event delegation off a single body listener handles every modal interaction — image clicks, modal
+                    close, sample submission — keeping the JS surface small and SPA-resistant.</p>
+            </section>
+
+            <p class="case-study__code-caption">// Folder structure</p>
+            <pre class="case-study__code"><code class="language-text">LF191/
+  src/
+    lib/
+      components/
+        button.js
+        modal.js
+        modalContent.js
+        pressFeatures.js
+      helpers/
+        closeModal.js
+        fetchProductData.js
+        openModal.js
+        utils.js
+      services/
+      shared/
+    experiment.js
+    _variables.scss
+    experiment.scss
+    index.html</code></pre>
+
+            <section class="case-study__section">
+                <h3>Live gallery fetch and injection</h3>
+                <p>Rather than copying the gallery HTML into the experiment (which would go stale every time the gallery
+                    was updated), the experiment fetches the live <code>/customer-gallery</code> page, parses it with
+                    <code>DOMParser</code>, extracts the main content block, and injects it directly into the homepage.
+                    The gallery stays in sync with the source automatically.</p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">const getDOMFromURL = async (url) =&gt; {
+  try {
+    const res = await fetch(url, { mode: 'cors' });
+    const html = await res.text();
+    return new DOMParser().parseFromString(html, 'text/html');
+  } catch (err) {
+    console.error('Failed to fetch or parse:', err);
+    return null;
+  }
+};
+
+// Inject gallery below the USP bar, then progressively reveal first 8 items
+getDOMFromURL('/customer-gallery').then((doc) =&gt; {
+  if (!doc) return;
+
+  const mainContent = doc.querySelector('.column.main');
+  mainContent.classList.add(`${ID}__photoGalarySection`);
+
+  if (!document.querySelector(`.${ID}__photoGalarySection`)) {
+    targetPoint.insertAdjacentElement('afterend', mainContent);
+  }
+
+  // Show first 8 items, hide the rest until "View Gallery" expands them
+  const gallerySection = document.querySelector(`.${ID}__photoGalarySection`);
+  if (!document.querySelector(`.${ID}__btnWrapper`)) {
+    gallerySection.insertAdjacentHTML('beforeend', buttonElem(ID));
+  }
+  hideElement();
+});</code></pre>
+
+            <section class="case-study__section">
+                <h3>Scraping PDP form data for AJAX cart submission</h3>
+                <p>Magento's "add free sample" action requires four pieces of data to submit cleanly: product ID, item
+                    value, form key (CSRF token), and form action URL. None of these are available from the gallery
+                    image itself — they live on the PDP. So the experiment fetches the product's PDP, parses it,
+                    extracts the form data, then submits the sample request through Magento's existing cart endpoint.
+                </p>
+                <p>This is the pattern that makes the inline ATB feel native — the user never leaves the homepage, but
+                    the request hits the same Magento controllers as a real PDP submission would.</p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">// Click a gallery image → fetch PDP, scrape form data, populate modal
+if (target.closest(`.${ID}__photoGalarySection`) &amp;&amp; target.closest('.grid-item')) {
+  const clickedItem = target.closest('.grid-item');
+  const imageElem = clickedItem.querySelector('img');
+  const modalElem = document.querySelector(`.${ID}__modal`);
+  const modalInnerContent = modalElem.querySelector('.modal-inner-content');
+
+  modalInnerContent.innerHTML = modalContent(ID, imageElem.dataset);
+
+  fetchProductDetails(imageElem.dataset.link)
+    .then(({ productValue, itemValue, formKeyValue, formAction }) =&gt; {
+      // Stash on the modal for the eventual sample submission
+      modalElem.dataset.itemValue = itemValue;
+      modalElem.dataset.formKey = formKeyValue;
+      modalElem.dataset.formAction = formAction;
+      modalElem.dataset.sku = imageElem.dataset.sku;
+      modalElem.dataset.productValue = productValue;
+
+      openModal(ID);
+    });
+}</code></pre>
+
+            <section class="case-study__section">
+                <h3>Sample submission with limit detection</h3>
+                <p>Magento enforces a per-product sample limit through cart metadata. Rather than guessing at the limit
+                    client-side, the experiment submits the request, then polls Magento's own
+                    <code>mage-cache-storage</code> in localStorage to read the cart state — including the
+                    <code>sample_individual_limit_reached</code> flag on each line item — and updates the button
+                    accordingly.</p>
+                <p>This means the limit logic always matches what Magento itself thinks the user is allowed to do. No
+                    second source of truth.</p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">if (target.closest(`.${ID}__sampleBtn`)) {
+  e.preventDefault();
+  const button = target.closest(`.${ID}__sampleBtn`).querySelector('button');
+  const formKey = getCookie('form_key');
+  const { sku, productValue, itemValue, formAction } = modalElem.dataset;
+
+  addToSampleCart(productValue, formKey, itemValue, formAction)
+    .then((response) =&gt; {
+      if (!response.success) {
+        button.textContent = 'Sample limit reached';
+        button.classList.add(`${ID}__disabled`);
+        showErrorNotification();
+        return;
+      }
+
+      button.textContent = 'Added to basket';
+      button.classList.add(`${ID}__disabled`);
+
+      // Read Magento's own cart state to detect sample-limit hits
+      pollerLite([
+        () =&gt; window.localStorage.getItem('mage-cache-storage'),
+        () =&gt; JSON.parse(window.localStorage.getItem('mage-cache-storage')),
+        () =&gt; JSON.parse(window.localStorage.getItem('mage-cache-storage')).cart
+      ], () =&gt; {
+        const { cart } = JSON.parse(window.localStorage.getItem('mage-cache-storage'));
+        const isLimitReached = cart.items.find(
+          (item) =&gt; item.product_sku === sku &amp;&amp; item.sample_individual_limit_reached
+        );
+
+        if (isLimitReached) {
+          button.textContent = 'Sample limit reached';
+          button.classList.add(`${ID}__disabled`);
+        }
+
+        showSuccessNotification();
+      });
+    });
+}</code></pre>
+
+            <section class="case-study__section">
+                <h3>Cloning host notifications instead of building a custom toast</h3>
+                <p>Magento renders success and error messages through a <code>.page.messages</code> block with
+                    established styling. Instead of building a separate toast system that would need maintenance and
+                    could drift from the host's design, the experiment polls for the host's own notification block,
+                    clones it, and surfaces it to the user. The visual treatment, colour palette, and animation are all
+                    the host's — the experiment just makes them appear at the right moment in the modal flow.</p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">const showSuccessNotification = () =&gt; {
+  pollerLite([
+    `.page.messages:not(.${ID}__showSuccessNotification) .messages .message-success`
+  ], () =&gt; {
+    const source = document.querySelector(
+      `.page.messages:not(.${ID}__showSuccessNotification)`
+    );
+    const clone = source.cloneNode(true);
+
+    if (!document.querySelector(`${ID}__showSuccessNotification`)) {
+      document.body.insertAdjacentElement('beforeend', clone);
+      clone.classList.add(`${ID}__showSuccessNotification`);
+    }
+  });
+};</code></pre>
+
+            <section class="case-study__section">
+                <h3>Single delegated click handler</h3>
+                <p>Every interaction — gallery image click, modal close, sample submission, overlay backdrop click —
+                    runs through one delegated listener on <code>document.body</code>. No per-element listeners, no
+                    cleanup logic on modal open/close, no risk of duplicate handlers across re-renders.</p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">document.body.addEventListener('click', (e) =&gt; {
+  const { target } = e;
+
+  // Gallery image → open modal
+  if (target.closest(`.${ID}__photoGalarySection`) &amp;&amp; target.closest('.grid-item')) {
+    // ...open modal flow
+  }
+
+  // Close button or overlay backdrop → close modal
+  else if (
+    (target.closest('.action-close') || target.closest('.modals-overlay')) &amp;&amp;
+    target.closest(`.${ID}__modal`)
+  ) {
+    closeModal(ID);
+  }
+
+  // Sample CTA → AJAX submit
+  else if (target.closest(`.${ID}__sampleBtn`)) {
+    // ...sample flow
+  }
+});</code></pre>
+
+            <section class="case-study__section">
+                <h2>What's measured</h2>
+                <p>Primary metric: <strong>sample CTR</strong> (modal open → add to basket). Secondary: PDP visits from
+                    "View Product" clicks, gallery image click rate, and "View Customer Gallery" expand rate.</p>
+            </section>
+
+            <section class="case-study__section">
+                <h2>Technical notes</h2>
+                <ul class="case-study__list">
+                    <li>Gallery content is fetched live — no stale data, automatic sync with the source page</li>
+                    <li>Event delegation: a single <code>document.body</code> click listener handles all modal
+                        interactions</li>
+                    <li><code>pollerLite</code> handles resilient DOM targeting across async page elements (USP bar,
+                        About Us section, press features)</li>
+                    <li>Product form data (product ID, item value, form key, action URL) is scraped from each PDP to
+                        power AJAX add-to-cart through Magento's existing controllers</li>
+                    <li>Experiment class <code>lf191</code> is added to <code>&lt;html&gt;</code> so all SCSS scopes
+                        cleanly without global style leakage</li>
+                    <li>Success and error notifications clone the host's native Magento UI rather than introducing a
+                        parallel toast system</li>
+                </ul>
+            </section>
+
+            <section class="case-study__section">
+                <h2>Post-test analysis</h2>
+                <p class="case-study__placeholder">Results pending. This section will be updated with anonymised outcome
+                    highlights once the analysis is published and approved for share.</p>
+            </section>
+
+            <a href="/#work"
+               class="case-study__back">← Back to all work</a>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2026 Arafat. Freelance CRO developer.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+
+</html>

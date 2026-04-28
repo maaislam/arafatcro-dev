@@ -1,20 +1,320 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
 
 <head>
-  <meta charset="UTF-8" />
-  <link rel="icon"
-        type="image/svg+xml"
-        href="/favicon.svg" />
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0" />
-  <title>arafatcro-dev</title>
+      <meta charset="UTF-8" />
+      <meta name="viewport"
+            content="width=device-width, initial-scale=1.0" />
+
+      <title>Arafat — Freelance CRO Developer | Convert, Optimizely, Adobe Target</title>
+      <meta name="description"
+            content="Freelance CRO developer building client-side A/B tests on Convert.com, Optimizely, Adobe Target, Dynamic Yield, and Monetate. Experiments shipped for Screwfix, S&P Global, Howdens, Travis Perkins, Avon, and others." />
+
+      <!-- Open Graph -->
+      <meta property="og:type"
+            content="website" />
+      <meta property="og:url"
+            content="https://arafatcro.dev/" />
+      <meta property="og:title"
+            content="Arafat — Freelance CRO Developer" />
+      <meta property="og:description"
+            content="Client-side A/B test development on Convert, Optimizely, Adobe Target, Dynamic Yield, and Monetate." />
+      <meta property="og:image"
+            content="https://arafatcro.dev/og-image.png" />
+
+      <!-- Twitter card -->
+      <meta name="twitter:card"
+            content="summary_large_image" />
+      <meta name="twitter:title"
+            content="Arafat — Freelance CRO Developer" />
+      <meta name="twitter:description"
+            content="Client-side A/B test development on Convert, Optimizely, Adobe Target, Dynamic Yield, and Monetate." />
+      <meta name="twitter:image"
+            content="https://arafatcro.dev/og-image.png" />
+
+      <link rel="canonical"
+            href="https://arafatcro.dev/" />
+
+      <link rel="preconnect"
+            href="https://fonts.googleapis.com" />
+      <link rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin />
+      <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+
+      <script type="module"
+              src="/src/scripts/main.js"></script>
 </head>
 
 <body>
-  <div id="app"></div>
-  <script type="module"
-          src="/src/scripts/main.js"></script>
+      <header class="site-header">
+            <div class="container site-header__inner">
+                  <a href="/"
+                     class="site-header__logo">Arafat</a>
+                  <nav class="site-header__nav"
+                       aria-label="Primary">
+                        <a href="#work">Work</a>
+                        <a href="#how-i-work">How I work</a>
+                        <a href="#contact">Contact</a>
+                  </nav>
+            </div>
+      </header>
+
+      <main>
+            <section class="hero">
+                  <div class="container">
+                        <h1 class="hero__title">
+                              Freelance CRO developer
+                              <span class="hero__title-accent">building client-side A/B tests that survive
+                                    production.</span>
+                        </h1>
+                        <p class="hero__lede">
+                              Convert.com, Optimizely, Adobe Target, Dynamic Yield, Monetate. I build experiments that
+                              hold up to engineering review, accessibility audits, and SPA edge cases — for retailers,
+                              builders' merchants, insurers, and DTC brands.
+                        </p>
+                        <p class="hero__credibility">
+                              Direct or via agency partners including FunnelEnvy and Brainlabs. Experiments shipped for
+                              Screwfix, S&amp;P Global, Howdens, Travis Perkins, Avon, Comparitech, Dr. Woof Apparel,
+                              VitaHustle, and others.
+                        </p>
+                        <a href="#work"
+                           class="button button--primary">See the work</a>
+                  </div>
+            </section>
+
+            <section id="work"
+                     class="work">
+                  <div class="container">
+                        <h2 class="section__title">Selected work</h2>
+                        <p class="section__lede">Six experiments showing the kinds of problems I solve — SPA-aware UI,
+                              server-load mitigation, enterprise platform quirks, and accessibility-compliant variants.
+                        </p>
+
+                        <div class="work__grid">
+
+                              <article class="card">
+                                    <div class="card__meta">
+                                          <span class="card__id">SCR278</span>
+                                          <span class="card__platform">Optimizely</span>
+                                    </div>
+                                    <h3 class="card__title">Desktop search immersive UI</h3>
+                                    <p class="card__client">Large UK home improvement retailer</p>
+                                    <p class="card__problem">Vertical search overlay had low engagement. F-pattern
+                                          reading suggested a landscape layout could lift SRP progression.</p>
+                                    <p class="card__solution">Built a darkened focus-state overlay, repositioned the
+                                          search element to a landscape layout, and added search-term-driven subcategory
+                                          chips for Variant 2. Maintained existing product-suggestion logic to isolate
+                                          layout as the variable. Two variants shipped sitewide on desktop.</p>
+                                    <a href="/work/scr278-desktop-search-immersive-ui.html"
+                                       class="card__link">Read the case study →</a>
+                              </article>
+
+                              <article class="card">
+                                    <div class="card__meta">
+                                          <span class="card__id">SCR289</span>
+                                          <span class="card__platform">Optimizely</span>
+                                    </div>
+                                    <h3 class="card__title">"Shop Similar" follow-me carousel</h3>
+                                    <p class="card__client">Large UK home improvement retailer</p>
+                                    <p class="card__problem">Google Shopping landers were exiting PDPs and re-entering
+                                          through Shopping multiple times when the specific product didn't fit. Top-50
+                                          power-tool SKUs by click volume were the priority.</p>
+                                    <p class="card__solution">Built a sticky "follow-me" similar-products carousel
+                                          scoped to the product's category. Scrapes the breadcrumb-derived PLP at a
+                                          price-bound API call, caches results in <code>sessionStorage</code> so
+                                          subsequent PDPs in the same category render instantly. V2 layers a brand
+                                          filter for brand-loyal users.</p>
+                                    <a href="/work/scr289-shop-similar-carousel.html"
+                                       class="card__link">Read the case study →</a>
+                              </article>
+
+                              <article class="card">
+                                    <div class="card__meta">
+                                          <span class="card__id">TP283</span>
+                                          <span class="card__platform">Monetate</span>
+                                    </div>
+                                    <h3 class="card__title">Trade-price prominence — account-creation lift</h3>
+                                    <p class="card__client">UK builders' merchant</p>
+                                    <p class="card__problem">Trade prices were rendered separately from retail prices on
+                                          PLPs and PDPs, so non-account users couldn't easily compare the two and
+                                          weren't motivated to create a trade account. The hypothesis: making trade
+                                          prices visually dominant alongside retail prices would lift trade account
+                                          creation.</p>
+                                    <p class="card__solution">Replaced the host's separate trade-price block with a
+                                          unified price banner showing retail and trade side-by-side, gated to
+                                          logged-out users via cookie check. Banner click opens an embedded login modal
+                                          using the host's own identity SDK, with a separate "I don't have an account"
+                                          CTA routing to signup.</p>
+                                    <a href="/work/tp283-trade-price-prominence.html"
+                                       class="card__link">Read the case study →</a>
+                              </article>
+
+                              <article class="card">
+                                    <div class="card__meta">
+                                          <span class="card__id">HOME120</span>
+                                          <span class="card__platform">webtrends optimize</span>
+                                    </div>
+                                    <h3 class="card__title">Comparison PLP — bundle product removal</h3>
+                                    <p class="card__client">UK home insurance provider</p>
+                                    <p class="card__problem">Internal data showed bundled "Gas Combo" products had lower
+                                          year-on-year renewal rates than single-category cover, dragging long-term
+                                          profitability. Stakeholders wanted to surface them on a separate page so
+                                          single-category products got cleaner focus.</p>
+                                    <p class="card__solution">Removed bundle items from three comparison PLPs by URL
+                                          match, restructured the grid from 3-up to 2-up, destroyed and re-initialised
+                                          the Swiper instance to match the new slide count, and dynamically injected a
+                                          new nav link to the dedicated bundle page once a user had visited a comparison
+                                          PLP.</p>
+                                    <a href="/work/home120-comparison-plp-restructure.html"
+                                       class="card__link">Read the case study →</a>
+                              </article>
+
+                              <article class="card">
+                                    <div class="card__meta">
+                                          <span class="card__id">AG125</span>
+                                          <span class="card__platform">Dynamic Yield</span>
+                                    </div>
+                                    <h3 class="card__title">Bestsellers carousel — homepage social proof</h3>
+                                    <p class="card__client">Global cosmetics retailer (Romania)</p>
+                                    <p class="card__problem">Off-boarding from the UK site cut the planned social-proof
+                                          test runtime short. The team needed a market that could deliver significance
+                                          inside a tight timeframe.</p>
+                                    <p class="card__solution">Built a 19-product bestsellers carousel with desktop
+                                          dropdown and mobile bottom-sheet variant pickers, integrated with Avon's
+                                          internal product API and <code>CartServiceModule</code> for inline add-to-bag,
+                                          plus IntersectionObserver-driven impression tracking on both control and
+                                          variant.</p>
+                                    <a href="/work/ag125-bestsellers-carousel.html"
+                                       class="card__link">Read the case study →</a>
+                              </article>
+
+                              <article class="card">
+                                    <div class="card__meta">
+                                          <span class="card__id">LF191</span>
+                                          <span class="card__platform">Convert.com</span>
+                                    </div>
+                                    <h3 class="card__title">Customer gallery homepage integration</h3>
+                                    <p class="card__client">UK luxury flooring retailer (Magento)</p>
+                                    <p class="card__problem">Customer gallery sat on a separate page where most homepage
+                                          visitors never reached it — a high-trust social proof asset locked behind a
+                                          navigation step.</p>
+                                    <p class="card__solution">Live-fetched the customer gallery into the homepage, built
+                                          a product modal that scrapes form data from PDPs to power inline AJAX sample
+                                          ordering, and surfaced Magento's native success/error notifications by cloning
+                                          the host's existing UI.</p>
+                                    <a href="/work/lf191-customer-gallery-homepage.html"
+                                       class="card__link">Read the case study →</a>
+                              </article>
+
+                              <article class="card">
+                                    <div class="card__meta">
+                                          <span class="card__id">SCR180</span>
+                                          <span class="card__platform">Optimizely</span>
+                                    </div>
+                                    <h3 class="card__title">PLP/PDP exit-intent overlay</h3>
+                                    <p class="card__client">Large UK home improvement retailer</p>
+                                    <p class="card__problem">Plain PLP exit rate of 14.4% across organic and paid
+                                          channels — users were leaving without finding a product that matched their
+                                          price or criteria. Returning users exited at 15.1%.</p>
+                                    <p class="card__solution">Built a custom <code>ExitIntent</code> detection class
+                                          (mouse trajectory, inactivity, tab-switch heuristics), an accessible modal
+                                          with focus trap, and a V2 carousel that fetches category-relevant clearance
+                                          products at price ranges derived from the breadcrumb and SKU scrape.</p>
+                                    <a href="/work/scr180-exit-intent-overlay.html"
+                                       class="card__link">Read the case study →</a>
+                              </article>
+
+                        </div>
+                  </div>
+            </section>
+
+            <section id="how-i-work"
+                     class="how-i-work">
+                  <div class="container">
+                        <h2 class="section__title">How I work</h2>
+                        <div class="how-i-work__grid">
+
+                              <div class="how-i-work__item">
+                                    <h3>Stack</h3>
+                                    <p>Vanilla ES6 IIFEs, BEM-scoped SCSS, custom DOM polling utility for late-rendering
+                                          elements, <code>MutationObserver</code> and <code>IntersectionObserver</code>
+                                          for SPA-aware behaviour. Comfortable with React-aware DOM updates (native
+                                          input descriptor patterns), focus-trap implementations with
+                                          <code>AbortController</code> cleanup, and ARIA-compliant component patterns.
+                                    </p>
+                              </div>
+
+                              <div class="how-i-work__item">
+                                    <h3>Platforms</h3>
+                                    <p>Convert.com, Optimizely Web, Adobe Target, Dynamic Yield, Monetate. Comfortable
+                                          integrating with Tealium, GA4, Adobe Analytics, AEM Experience Fragments, and
+                                          most consent management providers. Familiar with Magento, Shopify, and Next.js
+                                          host stacks.</p>
+                              </div>
+
+                              <div class="how-i-work__item">
+                                    <h3>QA &amp; quality bar</h3>
+                                    <p>Self-QA every variant across browsers and devices. Accessibility checks — focus
+                                          order, keyboard parity, ARIA semantics, screen-reader sanity — before
+                                          handover. Code reviewed against client engineering conventions where they
+                                          exist; written to pass review where they don't.</p>
+                              </div>
+
+                              <div class="how-i-work__item">
+                                    <h3>Engagement</h3>
+                                    <p>Direct with brands or as overflow capacity for CRO agencies. Available for short
+                                          sprints, retained capacity, or one-off complex builds. Async-first, UK and US
+                                          business hours covered. Plain communication for non-technical stakeholders
+                                          when it's needed; engineering-grade detail when it's required.</p>
+                              </div>
+
+                        </div>
+                  </div>
+            </section>
+
+            <section id="clients"
+                     class="clients">
+                  <div class="container">
+                        <h2 class="section__title">Clients &amp; partners</h2>
+                        <p class="clients__list">
+                              Experiments shipped for <strong>Screwfix</strong>, <strong>S&amp;P Global</strong>,
+                              <strong>Howdens</strong>, <strong>Travis Perkins</strong>, <strong>Avon</strong>,
+                              <strong>Comparitech</strong>, <strong>Dr. Woof Apparel</strong>,
+                              <strong>VitaHustle</strong>, <strong>HomeServe</strong>, <strong>Luxury Flooring</strong>,
+                              <strong>National Scrap Car</strong>, and others — directly or through agency partners
+                              including <strong>FunnelEnvy</strong> and <strong>Brainlabs</strong>.
+                        </p>
+                  </div>
+            </section>
+
+            <section id="contact"
+                     class="contact">
+                  <div class="container">
+                        <h2 class="section__title">Get in touch</h2>
+                        <p class="contact__lede">For project enquiries, overflow capacity, or to discuss a specific test
+                              idea. I respond within one UK business day.</p>
+                        <div class="contact__links">
+                              <a href="mailto:hello@arafatcro.dev"
+                                 class="button button--primary">hello@arafatcro.dev</a>
+                              <a href="https://www.linkedin.com/in/arafat-i-24689236/"
+                                 class="contact__secondary"
+                                 target="_blank"
+                                 rel="noopener">LinkedIn →</a>
+                              <a href="https://www.upwork.com/freelancers/arafatislam"
+                                 class="contact__secondary"
+                                 target="_blank"
+                                 rel="noopener">Upwork →</a>
+                        </div>
+                  </div>
+            </section>
+      </main>
+
+      <footer class="site-footer">
+            <div class="container">
+                  <p>© 2026 Arafat. Freelance CRO developer.</p>
+            </div>
+      </footer>
 </body>
 
 </html>

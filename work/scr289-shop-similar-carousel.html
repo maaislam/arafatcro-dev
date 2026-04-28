@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+    <title>SCR289 — "Shop Similar" follow-me carousel | Arafat</title>
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com" />
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" />
+    <script type="module"
+            src="/src/scripts/main.js"></script>
+</head>
+
+<body class="case-study">
+    <header class="site-header">
+        <div class="container site-header__inner">
+            <a href="/"
+               class="site-header__logo">Arafat</a>
+            <nav class="site-header__nav"
+                 aria-label="Primary">
+                <a href="/#work">Work</a>
+                <a href="/#how-i-work">How I work</a>
+                <a href="/#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="case-study__main">
+        <div class="container">
+            <a href="/#work"
+               class="case-study__back">← Back to all work</a>
+
+            <header class="case-study__header">
+                <div class="case-study__meta">
+                    <span class="case-study__id">SCR289</span>
+                    <span class="case-study__platform">Optimizely Web</span>
+                    <span class="case-study__client-tag">Large UK home improvement retailer</span>
+                </div>
+                <h1>"Shop Similar" follow-me carousel</h1>
+                <p class="case-study__lede">A two-variant test injecting a sticky similar-products carousel onto PDPs
+                    for Google Shopping landers, with breadcrumb-derived API fetching, sessionStorage caching, and a
+                    "follow-me" mechanic that persists the carousel as users navigate within the same category.</p>
+            </header>
+
+            <figure class="case-study__hero-image">
+                <img src="/work/scr289/hero-carousel.png"
+                     alt="Shop Similar Products carousel rendered above the PDP showing four similar drill products"
+                     loading="lazy" />
+            </figure>
+
+            <section class="case-study__section">
+                <h2>The problem</h2>
+                <p>Google Shopping landers arriving on PDPs for the top-50 power-tool SKUs were exhibiting a known
+                    pattern: when the specific product wasn't quite right, users were exiting and re-entering the site
+                    through Google Shopping multiple times rather than browsing alternatives on-site. The hypothesis was
+                    that giving these users immediate access to similar products from the same category — without
+                    forcing them through the existing PLP flow — would reduce exit rate and lift add-to-bag rate.</p>
+            </section>
+
+            <section class="case-study__section">
+                <h2>The hypothesis</h2>
+                <blockquote class="case-study__quote">
+                    We believe that adding a similar-products carousel to the PDP for Google Shopping landers will
+                    result in a decrease in exit rate from these users and an increase in add-to-basket rate. This is
+                    due to users having alternative products to browse, removing the need to exit and re-enter through
+                    Google Shopping.
+                </blockquote>
+            </section>
+
+            <section class="case-study__section">
+                <h2>The solution</h2>
+                <p><strong>Variation 1 — Carousel, no brand filter.</strong> A "Shop Similar Products" carousel renders
+                    above the PDP for users landing from Google Shopping on a top-50 SKU. Products come from the same
+                    category as the viewed product (derived from the last breadcrumb), with a 25% lower price threshold
+                    and +£100 upper price ceiling to protect AOV.</p>
+                <p><strong>Variation 2 — Carousel with brand filter.</strong> Same as V1, but adds a brand filter on the
+                    underlying PLP fetch — testing whether brand-loyal users convert better when shown only same-brand
+                    alternatives.</p>
+                <p>Both variants implement a "follow-me" behaviour: once a user clicks a product in the carousel, the
+                    carousel persists across subsequent PDPs in the same category, allowing continuous browsing of
+                    suggestions without re-fetching.</p>
+            </section>
+
+            <figure class="case-study__figure">
+                <img src="/work/scr289/variants-comparison.png"
+                     alt="Side-by-side wireframes comparing Control, Variation 1, and Variation 2 carousels on PDP"
+                     loading="lazy" />
+                <figcaption>Control vs V1 (no brand filter) vs V2 (brand-filtered)</figcaption>
+            </figure>
+
+            <section class="case-study__section">
+                <h2>Implementation</h2>
+                <p>Built as an Optimizely Web IIFE on a Next.js SPA. The technically interesting parts were the
+                    data-fetching strategy and the cache-driven follow-me mechanic — both designed to render fast, avoid
+                    redundant network calls, and stay accurate as the user navigates.</p>
+            </section>
+
+            <p class="case-study__code-caption">// Folder structure</p>
+            <pre class="case-study__code"><code class="language-text">SCR289/
+  src/
+    lib/
+      components/
+        product.js
+        sliderWrapper.js
+      data/
+        data.js               // top-50 SKU list
+      helpers/
+        initSwiper.js
+        swiper.js
+        utils.js
+    experiment.js
+    _swiper.scss
+    _variables.scss
+    experiment.scss
+    triggers.js</code></pre>
+
+            <section class="case-study__section">
+                <h3>Breadcrumb-derived API fetch</h3>
+                <p>Rather than building a separate similar-products endpoint, the carousel scrapes the host's existing
+                    PLP. The last breadcrumb link points to the product's narrowest category — that URL becomes the data
+                    source, with price bounds derived from the current PDP's price (±25% lower, +£100 upper, capped at
+                    100 results).</p>
+                <p>V2 appends a <code>brand</code> query parameter sourced from the PDP's brand logo <code>alt</code>
+                    attribute.</p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">const init = () =&gt; {
+  const { basicVatPriceDisplay, prodPrice, prodPriceIncVat } = window.utag.data;
+
+  const productPrice = Number(
+    basicVatPriceDisplay === 'INC-VAT' ? prodPriceIncVat[0] : prodPrice[0]
+  );
+
+  // 25% lower price threshold protects AOV/RPS
+  const priceQueryString = {
+    price_from: productPrice * 0.75,
+    price_to: productPrice + 100,
+  };
+
+  // Last breadcrumb = product's narrowest category PLP
+  const lastBreadcrumb = document.querySelector(
+    '[data-qaid="breadcrumb-qa"] &gt; li:last-child a'
+  );
+  const plpUrl = new URL(lastBreadcrumb.href);
+  plpUrl.searchParams.set('price_from', priceQueryString.price_from);
+  plpUrl.searchParams.set('price_to', priceQueryString.price_to);
+  plpUrl.searchParams.set('page_size', 100);
+
+  // V2: brand filter sourced from PDP brand logo
+  if (VARIATION === '2') {
+    const brandLogo = document.querySelector('[data-qaid="pdp-brand-logo"]');
+    const brand = brandLogo?.alt.trim().replace(/\s+/g, '_').toLowerCase();
+    if (brand) plpUrl.searchParams.set('brand', brand);
+  }
+};</code></pre>
+
+            <section class="case-study__section">
+                <h3>sessionStorage cache + follow-me mechanic</h3>
+                <p>First PDP in a category: fetch SKUs from the price-bound PLP, hydrate full product data, render the
+                    carousel, persist the result to <code>sessionStorage</code>. Subsequent PDPs in the same category:
+                    the cache hit renders instantly with no network call. If the user navigates to a different category,
+                    the cache invalidates against the new PDP's category ID and the carousel removes itself.</p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">const cacheKey = `${ID}__data-${VARIATION}`;
+const cached = sessionStorage.getItem(cacheKey);
+
+if (cached) {
+  const stored = JSON.parse(cached);
+  const currentCategory = window.utag.data.prodCategoryId[0];
+
+  // Cache invalidates if user has moved to a different category
+  const inSameCategory = stored
+    .map((item) =&gt; item.lastBreadcrumbLink)
+    .some((link) =&gt; link.includes(currentCategory));
+
+  if (!inSameCategory) {
+    document.querySelectorAll(`.${ID}__sliderWrapper`).forEach((el) =&gt; el.remove());
+    document.documentElement.classList.remove(ID, `${ID}-${VARIATION}`);
+    return;
+  }
+
+  sliderRender(targetPoint, stored);
+  initSwiper(`.${ID}__sliderBox`, VARIATION, stored.length);
+  return;
+}
+
+// Cache miss — fetch, render, persist
+fetchSkus(plpUrl)
+  .then((skus) =&gt; getProductsData(skus))
+  .then((products) =&gt; {
+    const filtered = products.filter(Boolean);
+    if (!filtered.length) return;
+
+    sliderRender(targetPoint, filtered);
+    initSwiper(`.${ID}__sliderBox`, VARIATION, filtered.length);
+    sessionStorage.setItem(cacheKey, JSON.stringify(filtered.slice(0, 20)));
+  });</code></pre>
+
+            <section class="case-study__section">
+                <h3>Audience gate — top-50 SKU + Google Shopper</h3>
+                <p>The carousel only renders if (a) the current URL matches one of the top-50 power-tool SKUs maintained
+                    in <code>data.js</code>, and (b) traffic is identifiable as a Google Shopper, OR the cache is
+                    already populated (so the follow-me carousel persists for users who entered via Shopping). Anyone
+                    else gets the standard PDP and an event fires to confirm suppression.</p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">pollerLite([
+  () =&gt; typeof window.tealiumDataLayer === 'object',
+  () =&gt; window.utag !== undefined,
+  () =&gt; window.__NEXT_DATA__ !== undefined
+], () =&gt; {
+  const isToplistProduct = products.find((sku) =&gt;
+    window.location.href.toLowerCase().includes(sku.toLowerCase())
+  );
+  const cached = sessionStorage.getItem(`${ID}__data-${VARIATION}`);
+
+  if ((isToplistProduct &amp;&amp; isGoogleShopper()) || cached) {
+    setTimeout(init, DOM_RENDER_DELAY);
+  } else {
+    trackEvent('User not shown "shop similar" carousel due to onward navigation');
+  }
+});</code></pre>
+
+            <section class="case-study__section">
+                <h3>Click-source attribution</h3>
+                <p>To distinguish carousel-driven PDP visits from organic ones in analytics, a sessionStorage flag sets
+                    when a carousel product is clicked, then fires a dedicated event on the next PDP load. The flag
+                    self-clears on any non-carousel product interaction.</p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">// On carousel click — flag the next PDP
+if (target.closest(`.${ID}__productLink`)) {
+  trackEvent('User clicks a product from shop similar carousel');
+  sessionStorage.setItem('clickedFromSCR289', 'true');
+}
+
+// On next PDP load — fire attribution event
+if (isProductPage &amp;&amp; sessionStorage.getItem('clickedFromSCR289')) {
+  trackEvent('User lands on PDP from shop similar carousel');
+}
+
+// User clicked something else — clear the flag
+if (target.closest('[data-qaid="pdp-best-seller-container"]')) {
+  sessionStorage.removeItem('clickedFromSCR289');
+}</code></pre>
+
+            <section class="case-study__section">
+                <h2>Acceptance criteria</h2>
+                <ul class="case-study__list">
+                    <li>Test runs on all devices</li>
+                    <li>Targets top-50 power-tool Google Shopping SKUs by click volume</li>
+                    <li>Two variations — V1 (no brand filter), V2 (brand filter applied)</li>
+                    <li>25% lower price threshold to protect AOV/RPS</li>
+                    <li>Carousel persists ("follows") across PDPs in the same category</li>
+                    <li>Carousel removes itself when user navigates to a different category</li>
+                    <li>Conditions Met fires only when both audience gates are satisfied</li>
+                    <li>Click-source attribution events distinguish carousel-driven traffic in analytics</li>
+                </ul>
+            </section>
+
+            <section class="case-study__section">
+                <h2>Success metrics</h2>
+                <p>Primary metric: <strong>add-to-bag rate</strong>. Secondary metrics: PDP exit rate, PDP bounce rate,
+                    conversion rate, revenue per session, number of PDPs viewed, average order value, session duration.
+                </p>
+            </section>
+
+            <section class="case-study__section">
+                <h2>Post-test analysis</h2>
+                <p class="case-study__placeholder">Results pending. This section will be updated with anonymised outcome
+                    highlights once the analysis is published and approved for share.</p>
+            </section>
+
+            <a href="/#work"
+               class="case-study__back">← Back to all work</a>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2026 Arafat. Freelance CRO developer.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+
+</html>

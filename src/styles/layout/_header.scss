@@ -1,0 +1,41 @@
+@use '../abstracts/variables' as *;
+
+.site-header {
+  padding-block: $space-5;
+  border-bottom: 1px solid $color-border;
+  position: sticky;
+  top: 0;
+  background: rgba(11, 13, 16, 0.85);
+  backdrop-filter: blur(12px);
+  z-index: 10;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    font-weight: 700;
+    font-size: $fs-md;
+    letter-spacing: -0.01em;
+
+    &:hover {
+      color: $color-accent;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    gap: $space-5;
+
+    a {
+      color: $color-text-muted;
+      font-size: $fs-sm;
+
+      &:hover {
+        color: $color-text;
+      }
+    }
+  }
+}

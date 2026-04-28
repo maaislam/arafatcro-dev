@@ -1,0 +1,55 @@
+@use '../abstracts/variables' as *;
+
+body {
+  font-family: $font-sans;
+  font-size: $fs-base;
+  color: $color-text;
+}
+
+h1 {
+  font-size: $fs-2xl;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+
+  @media (min-width: $bp-md) {
+    font-size: $fs-3xl;
+  }
+}
+
+h2 {
+  font-size: $fs-xl;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin: 1rem 0;
+
+  @media (min-width: $bp-md) {
+    font-size: 2rem;
+  }
+}
+
+h3 {
+  font-size: $fs-lg;
+  font-weight: 600;
+}
+
+p {
+  color: $color-text;
+}
+
+code {
+  font-family: $font-mono;
+  font-size: 0.875em;
+  background: $color-code-bg;
+  padding: 0.15em 0.4em;
+  border-radius: $radius-sm;
+  border: 1px solid $color-border;
+}
+
+strong {
+  font-weight: 600;
+  color: $color-text;
+}
+
+a {
+  transition: color $transition-fast;
+}

@@ -1,0 +1,353 @@
+<!--
+  SCR180 — PLP/PDP exit-intent overlay
+  Image paths: /work/scr180/[image].png
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+    <title>SCR180 — PLP/PDP exit-intent overlay | Arafat</title>
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com" />
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" />
+    <script type="module"
+            src="/src/scripts/main.js"></script>
+</head>
+
+<body class="case-study">
+    <header class="site-header">
+        <div class="container site-header__inner">
+            <a href="/"
+               class="site-header__logo">Arafat</a>
+            <nav class="site-header__nav"
+                 aria-label="Primary">
+                <a href="/#work">Work</a>
+                <a href="/#how-i-work">How I work</a>
+                <a href="/#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="case-study__main">
+        <div class="container">
+            <a href="/#work"
+               class="case-study__back">← Back to all work</a>
+
+            <header class="case-study__header">
+                <div class="case-study__meta">
+                    <span class="case-study__id">SCR180</span>
+                    <span class="case-study__platform">Optimizely Web</span>
+                    <span class="case-study__client-tag">Large UK home improvement retailer</span>
+                </div>
+                <h1>PLP/PDP exit-intent overlay</h1>
+                <p class="case-study__lede">A two-variant test on PLP and PDP pages: a custom-built exit-intent
+                    detection system triggers a "take another look before you go" modal, with V2 enriching the modal
+                    with category-relevant clearance products fetched live from the host's own search endpoint.</p>
+            </header>
+
+            <figure class="case-study__hero-image">
+                <img src="/work/scr180/hero-modal.png"
+                     alt="Exit-intent modal showing offer category tiles and a product carousel of category-relevant clearance items"
+                     loading="lazy" />
+            </figure>
+
+            <section class="case-study__section">
+                <h2>The problem</h2>
+                <p>PLP exit rate sat at 14.4%, with returning users leaving at 15.1% and new users at 14%. The gap by
+                    channel was substantial: organic search at 16.3%, paid search at 13.6%, affiliates at 3.63%, email
+                    at 7.4%. The pattern across user research and prior banner tests pointed to two related issues:</p>
+                <ul class="case-study__list">
+                    <li>Targeted, value-led promos converted well when users found them, but visibility was inconsistent
+                        — banner overload was diluting attention</li>
+                    <li>High-engagement banners didn't always convert. Post-click experience needed to match the promo's
+                        promise to retain the user</li>
+                    <li>Users on PLPs who hadn't found a price-match or criteria-match weren't being given an
+                        alternative path before leaving</li>
+                </ul>
+            </section>
+
+            <section class="case-study__section">
+                <h2>The hypothesis</h2>
+                <blockquote class="case-study__quote">
+                    If we implement an exit-intent pop-up modal with value-led links to promotions or category-specific
+                    products, then we expect to see a reduction in PLP and PDP exit rates, because we are providing an
+                    immediate, alternative path to discovery for users who haven't yet found a product that matches
+                    their price or criteria.
+                </blockquote>
+            </section>
+
+            <section class="case-study__section">
+                <h2>The solution</h2>
+                <p><strong>Variation 1 — Value-led category navigation.</strong> When exit intent is detected, a modal
+                    appears with a "take another look before you go" message and three large category tiles linking to
+                    Monthly Offers, Clearance, and Low Prices Checked.</p>
+            </section>
+
+            <figure class="case-study__figure">
+                <img src="/work/scr180/v1-modal.png"
+                     alt="Variation 1 modal showing three category tiles for Monthly Offers, Clearance, and Low Prices"
+                     loading="lazy" />
+                <figcaption>Variation 1 — three value-led category tiles, desktop and mobile</figcaption>
+            </figure>
+
+            <section class="case-study__section">
+                <p><strong>Variation 2 — Category navigation + product carousel.</strong> Builds on V1 by adding a
+                    "Check out these products" carousel below the tiles. Products are pulled live from the host's
+                    clearance category, filtered by the Tier 1 category derived from the user's current PLP/PDP
+                    breadcrumb, with a £25–£50 price range. The carousel includes inline add-to-cart with success state.
+                </p>
+            </section>
+
+            <figure class="case-study__figure">
+                <img src="/work/scr180/v2-modal.png"
+                     alt="Variation 2 modal showing category tiles plus a product carousel with inline add-to-basket"
+                     loading="lazy" />
+                <figcaption>Variation 2 — adds a category-relevant product carousel with inline ATB</figcaption>
+            </figure>
+
+            <section class="case-study__section">
+                <h2>Implementation</h2>
+                <p>Three architectural decisions shaped this build: a custom <code>ExitIntent</code> detection class (no
+                    third-party dependency), a live HTML-scrape against the host's existing search endpoint to source
+                    clearance products by category, and a strict accessibility layer with <code>FocusTrap</code>, ARIA
+                    semantics, and keyboard parity.</p>
+                <p>The test ran on PLPs and PDPs across desktop, mobile, and tablet, with different inactivity
+                    thresholds per device class.</p>
+            </section>
+
+            <p class="case-study__code-caption">// Folder structure</p>
+            <pre class="case-study__code"><code class="language-text">SCR180/
+  src/
+    lib/
+      components/
+        modal.js
+        product.js
+        productsWrapper.js
+        spinner.js
+      helpers/
+        initSwiper.js
+        storeProduct.js
+        swiper.js
+        utils.js
+    experiment.js
+    _swiper.scss
+    _variables.scss
+    experiment.scss
+    triggers.js</code></pre>
+
+            <section class="case-study__section">
+                <h3>Custom ExitIntent class</h3>
+                <p>Built as a small, dependency-free class with multiple detection signals: mouse trajectory toward
+                    browser tabs and close area on desktop, inactivity timers (30s desktop, 15s mobile), scroll-speed
+                    threshold, and a tab-switch counter for users bouncing between tabs. <code>fireOnce</code> ensures
+                    one trigger per session; <code>onExit</code> fires for analytics regardless of whether the modal
+                    showed.</p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">exitIntent = new ExitIntent({
+  inactivityTimeout: isMobile() ? 15000 : 30000,
+  scrollSpeedThreshold: 3,
+  sensitivity: 20,
+  fireOnce: true,
+  tabSwitchThreshold: 3,
+  tabSwitchWindow: 120000,
+
+  // Same modal logic for both first exit-intent and welcome-back triggers
+  onExitIntent: showOverlay,
+  onWelcomeBack: showOverlay,
+
+  // Fires when user actually leaves — for analytics regardless of overlay
+  onExit: ({ device }) =&gt; {
+    const pageType = isPDP() ? 'PDP' : isPLP() ? 'PLP' : 'other';
+    fireEvent(`${ID}-exit_intent_leave`);
+  },
+});</code></pre>
+
+            <section class="case-study__section">
+                <h3>Session-aware show logic</h3>
+                <p>The modal shows once per session (<code>fireOnce</code> on the detector), and dismissal persists for
+                    the session via <code>sessionStorage</code>. The overlay is also gated to PDP and PLP only — even if
+                    exit intent fires elsewhere, the modal won't render. This kept the test scope tight to where the
+                    brief targeted.</p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">const showOverlay = ({ source, device }) =&gt; {
+  fireEvent('Conditions Met');
+  trackEvent('Conditions Met');
+
+  if (VARIATION === 'control') return;
+
+  // Dismissal persists for the session
+  if (sessionStorage.getItem(`${ID}-modalClosed`) === 'true') return;
+
+  // Restrict modal to PDP/PLP only
+  if (!isPDP() &amp;&amp; !isPLP()) return;
+
+  closeModal(); // remove any stale modal first
+
+  const overlay = document.createElement('div');
+  overlay.className = `${ID}-modal-overlay`;
+  overlay.id = `${ID}-modalOverlay`;
+  overlay.innerHTML = modal(ID, VARIATION);
+  document.body.appendChild(overlay);
+};</code></pre>
+
+            <section class="case-study__section">
+                <h3>Live category-aware product fetch (V2)</h3>
+                <p>V2 needed clearance products relevant to the user's current Tier 1 category, in a £25–£50 price
+                    range. Rather than building a new endpoint, the experiment scrapes the host's own search results
+                    page for the clearance promo, filtered by the parent category from the breadcrumb.
+                    <code>DOMParser</code> extracts SKU IDs, then a separate hydration call fetches full product data.
+                </p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">const fetchClearanceSkus = (categoryId, priceFrom = 5, priceTo = 25) =&gt; {
+  const url = `/search?search=marchdealspromo&amp;category=${categoryId}` +
+              `&amp;price_from=${priceFrom}&amp;price_to=${priceTo}&amp;sort_by=-relevance`;
+
+  return fetch(url)
+    .then((res) =&gt; res.text())
+    .then((html) =&gt; {
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      return [...doc.querySelectorAll('[data-qaid="sku"]')]
+        .map((el) =&gt; el.textContent.trim().replace(/[()]/g, ''));
+    });
+};
+
+// Parent category from breadcrumb (Tier 1)
+const getParentId = (breadcrumb) =&gt; {
+  const elem = breadcrumb || document.querySelector('[data-qaid="breadcrumb-qa"]');
+  const links = elem.querySelectorAll('li a[href]');
+  return links.length &gt;= 2
+    ? links[1].getAttribute('href').split('/').pop()
+    : null;
+};</code></pre>
+
+            <section class="case-study__section">
+                <h3>Accessibility — FocusTrap and ARIA</h3>
+                <p>The modal uses a custom <code>FocusTrap</code> utility scoped to the modal container and close
+                    button. Activated when the modal renders, deactivated on close. Keyboard parity ensures
+                    <code>Tab</code> cycles inside the modal, <code>Escape</code> dismisses, and focus returns to the
+                    triggering element after close.
+                </p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">// Activate trap once products have hydrated and modal is fully rendered
+pollerLite([() =&gt; typeof window.Swiper === 'function'], () =&gt; {
+  initSwiper(`.${ID}__products`);
+
+  window.trapFocus = new window.FocusTrap(
+    `.${ID}-modal-container`,
+    `.${ID}-modal-close`
+  );
+  window.trapFocus.activate();
+
+  fireEvent('product recs visible');
+});
+
+// On close — deactivate trap and remove modal
+const closeModal = () =&gt; {
+  const modal = document.getElementById(`${ID}-modalOverlay`);
+  if (modal) modal.remove();
+  window.trapFocus?.deactivate();
+};</code></pre>
+
+            <section class="case-study__section">
+                <h3>Inline add-to-cart with success state</h3>
+                <p>The product carousel ATB doesn't navigate — it adds to basket via the host's cart API, then swaps the
+                    button for a "1 in your basket / Checkout Now" success block. <code>aria-busy</code> toggles during
+                    the request, a spinner renders inside the button, and the original button DOM is replaced cleanly
+                    after success.</p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">if (target.closest(`.${ID}__atc`)) {
+  const btn = target.closest(`.${ID}__atc`);
+  const sku = btn.getAttribute('data-sku');
+  if (!sku) return;
+
+  btn.insertAdjacentHTML('beforeend', spinner(ID));
+  target.setAttribute('aria-busy', 'true');
+
+  addToCart(sku)
+    .then(() =&gt; {
+      trackEvent('ATC Clicked - from recs module');
+      target.setAttribute('aria-busy', 'false');
+      btn.querySelector(`.${ID}__spinner`).remove();
+
+      const successHtml = `
+        &lt;div class="QTG7m_" data-qaid="in-basket-text" aria-live="polite"&gt;
+          &lt;div class="WRPQQe"&gt;1 in your basket&lt;/div&gt;
+          &lt;a href="/basket" tabindex="0"&gt;Checkout Now&lt;/a&gt;
+        &lt;/div&gt;`;
+
+      btn.insertAdjacentHTML('afterend', successHtml);
+      btn.remove();
+    })
+    .catch(() =&gt; {
+      target.setAttribute('aria-busy', 'false');
+      btn.querySelector(`.${ID}__spinner`).remove();
+    });
+}</code></pre>
+
+            <section class="case-study__section">
+                <h2>Acceptance criteria</h2>
+                <ul class="case-study__list">
+                    <li>Test runs on desktop, mobile, and tablet</li>
+                    <li>Targets PLP and PDP only</li>
+                    <li>Two variants — V1 (category links), V2 (category links + product carousel)</li>
+                    <li>Desktop trigger: mouse movement toward browser tabs/close area, OR 30 seconds inactivity</li>
+                    <li>Mobile trigger: 15 seconds inactivity</li>
+                    <li>Modal shows once per session</li>
+                    <li>Dismissal persists for the session</li>
+                    <li>V2 products: same Tier 1 category as current PLP/PDP, £25–£50 price range</li>
+                    <li>Modal is keyboard accessible with focus trap and Escape-to-close</li>
+                </ul>
+            </section>
+
+            <section class="case-study__section">
+                <h2>Success metrics</h2>
+                <p>Primary metric: <strong>exit rate of PLP and PDP</strong>. Secondary: re-engagement rate (tile or
+                    product click followed by continued browsing), ATB rate from the V2 carousel, conversion rate of
+                    overlay-engaged users.</p>
+            </section>
+
+            <section class="case-study__section">
+                <h2>Pre-test context</h2>
+                <p>Pre-test data informed both the page targeting and the messaging. Targeted product deals (e.g. "Save
+                    60% on TurboGold Trade Woodscrews") had shown both engagement and conversion strength in prior
+                    tests, validating the value-led tile approach in V1. Banner overload had been identified as a likely
+                    contributor to PLP exit — supporting V2's narrower, category-aware product surface as a less noisy
+                    alternative.</p>
+            </section>
+
+            <section class="case-study__section">
+                <h2>Post-test analysis</h2>
+                <p class="case-study__placeholder">Results pending. This section will be updated with anonymised outcome
+                    highlights once the analysis is published and approved for share.</p>
+            </section>
+
+            <a href="/#work"
+               class="case-study__back">← Back to all work</a>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2026 Arafat. Freelance CRO developer.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+
+</html>

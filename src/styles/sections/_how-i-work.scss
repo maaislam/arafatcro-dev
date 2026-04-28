@@ -1,0 +1,30 @@
+@use '../abstracts/variables' as *;
+
+.how-i-work {
+  padding-block: $space-9;
+  border-top: 1px solid $color-border;
+
+  &__grid {
+    display: grid;
+    gap: $space-6;
+    grid-template-columns: 1fr;
+
+    @media (min-width: $bp-md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__item {
+    h3 {
+      font-size: $fs-md;
+      margin-bottom: $space-3;
+      color: $color-text;
+    }
+
+    p {
+      font-size: $fs-sm;
+      color: $color-text-muted;
+      line-height: 1.7;
+    }
+  }
+}

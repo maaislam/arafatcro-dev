@@ -1,0 +1,302 @@
+<!--
+  HOME120 — Comparison PLP bundle removal + navigation injection
+  Image paths: /work/home120/[image].png
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+    <title>HOME120 — Comparison PLP bundle removal | Arafat</title>
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com" />
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" />
+    <script type="module"
+            src="/src/scripts/main.js"></script>
+</head>
+
+<body class="case-study">
+    <header class="site-header">
+        <div class="container site-header__inner">
+            <a href="/"
+               class="site-header__logo">Arafat</a>
+            <nav class="site-header__nav"
+                 aria-label="Primary">
+                <a href="/#work">Work</a>
+                <a href="/#how-i-work">How I work</a>
+                <a href="/#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="case-study__main">
+        <div class="container">
+            <a href="/#work"
+               class="case-study__back">← Back to all work</a>
+
+            <header class="case-study__header">
+                <div class="case-study__meta">
+                    <span class="case-study__id">HOME120</span>
+                    <span class="case-study__platform">Optimizely Web</span>
+                    <span class="case-study__client-tag">UK home insurance provider</span>
+                </div>
+                <h1>Comparison PLP — bundle product removal</h1>
+                <p class="case-study__lede">A surgical edit to three comparison PLPs: remove bundled cover products that
+                    were hurting renewal rates, restructure the grid to suit fewer items, re-initialise the host's
+                    Swiper carousel cleanly, and inject a new navigation entry to the dedicated bundle page after first
+                    visit.</p>
+            </header>
+
+            <figure class="case-study__hero-image">
+                <img src="/work/home120/comparison-plp.png"
+                     alt="Heating insurance comparison PLP showing single-category cover cards in a swipeable carousel"
+                     loading="lazy" />
+            </figure>
+
+            <section class="case-study__section">
+                <h2>The problem</h2>
+                <p>Internal data on cover renewals showed a consistent pattern: customers who purchased bundled products
+                    (Gas Combo Cover variants — Heating + Plumbing, Heating + Plumbing + Electrics, etc.) were less
+                    likely to renew their cover after the first year compared to customers who bought single-category
+                    cover. Bundles were generating revenue in year one but eroding the long-term customer base.</p>
+                <p>Stakeholders aligned on a structural change: pull the bundles out of the main comparison PLPs so
+                    single-category products had cleaner focus, and house the bundles on a separate dedicated page. The
+                    test would validate whether the cleaner comparison experience drove higher progression to PDPs.</p>
+            </section>
+
+            <section class="case-study__section">
+                <h2>The hypothesis</h2>
+                <blockquote class="case-study__quote">
+                    Because we saw lower renewal rates and reduced profitability from customers purchasing Gas Combo
+                    Products, we believe removing them from the Heating, Plumbing, and Electrics comparison PLPs and
+                    placing them on a separate URL will result in greater focus on single-category products, higher
+                    progression into PDPs, and a more sustainable long-term revenue mix.
+                </blockquote>
+            </section>
+
+            <section class="case-study__section">
+                <h2>The solution</h2>
+                <p>Three coordinated changes on the variant:</p>
+                <ul class="case-study__list">
+                    <li><strong>Remove Gas Combo products</strong> from three comparison PLPs (Heating, Plumbing,
+                        Electrics) by matching against a known list of bundle product URLs</li>
+                    <li><strong>Restructure the grid</strong> from 3-up to 2-up so the remaining products don't render
+                        in a half-empty layout</li>
+                    <li><strong>Inject a nav link</strong> to the new dedicated bundle page (HomeServe Premium Cover)
+                        into the Home Cover dropdown — but only after the user has visited a comparison PLP, so the new
+                        entry follows the journey rather than appearing cold</li>
+                </ul>
+                <p>The grid restructure required tearing down and rebuilding the host's Swiper instance, since the
+                    existing carousel was sized to a 3-slide layout and would have rendered awkwardly with two.</p>
+            </section>
+
+            <section class="case-study__section">
+                <h2>Implementation</h2>
+                <p>The challenge here wasn't building anything new — it was editing an existing PLP cleanly without
+                    breaking the host's carousel, navigation, or routing. Three patterns mattered: matching by URL
+                    rather than DOM heuristics (resilient to host re-renders), re-initialising Swiper safely (destroy
+                    first, then construct), and using <code>sessionStorage</code> to gate the navigation injection so it
+                    only fires after the qualifying journey.</p>
+            </section>
+
+            <p class="case-study__code-caption">// Folder structure</p>
+            <pre class="case-study__code"><code class="language-text">HOME120/
+  src/
+    lib/
+      helpers/
+        utils.js
+    experiment.js
+    _variables.scss
+    experiment.scss
+    triggers.js</code></pre>
+
+            <section class="case-study__section">
+                <h3>Targeting bundle products by URL, not DOM heuristics</h3>
+                <p>Bundle products could be identified by their hardcoded URLs — a list of known bundle paths covering
+                    both standard and "xs1" variants. Matching this way is more durable than matching by product name,
+                    price, or layout position, all of which the host could change without notice.</p>
+                <p>Once matched, the bundle's promo box is hidden and removed from the Swiper slide pool so it doesn't
+                    take up a slot in the carousel. The parent grid container's class is swapped from
+                    <code>grid-33x3</code> to <code>grid-50x2</code> to render cleanly with the smaller item count.</p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">const itemsToHide = [
+  '/insurance/heating-plumbing-cover-service-xs1',
+  '/insurance/heating-plumbing-electrics-cover-service-xs1',
+  '/insurance/heating-plumbing-electrics-plus-cover-service-xs1',
+  '/insurance/heating-plumbing-cover-service',
+  '/insurance/heating-plumbing-electrics-cover-service',
+  '/insurance/heating-plumbing-electrics-plus-cover-service',
+];
+
+itemsToHide.forEach((href) =&gt; {
+  const element = document.querySelector(`.promo-box:has(a[href="${href}"])`);
+  if (!element) return;
+
+  // Hide and remove from the Swiper slide pool
+  element.classList.add('hidden');
+  element.classList.remove('swiper-slide');
+
+  // Restructure the grid to suit fewer items
+  const parent = element.parentElement;
+  parent?.classList.remove('grid-33x3');
+  parent?.classList.add('grid-50x2');
+});</code></pre>
+
+            <section class="case-study__section">
+                <h3>Safely re-initialising Swiper after layout change</h3>
+                <p>The host's existing carousel was already initialised on page load with a 3-slide configuration.
+                    Removing slides without destroying the carousel first leaves the Swiper instance referencing dead
+                    DOM nodes — the dots, navigation arrows, and slide widths get out of sync, and you end up with a
+                    visibly broken carousel.</p>
+                <p>The fix is straightforward but easy to miss: walk every <code>.swiper</code> on the page, call
+                    <code>destroy(true, true)</code> to clean up styles and event listeners, null out the instance, then
+                    construct a fresh Swiper with the new slide configuration.</p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">if (hasSwiper()) {
+  const swiperElem = document.querySelector('.swiper');
+  swiperElem.classList.add('adjusted-swiper');
+
+  // Tear down every existing instance — clears styles AND event listeners
+  document.querySelectorAll('.swiper').forEach((el) =&gt; {
+    if (el.swiper) {
+      el.swiper.destroy(true, true);
+      el.swiper = undefined;
+    }
+  });
+
+  // Build fresh with the new slide configuration
+  new Swiper('.swiper', {
+    slidesPerView: 1.2,
+    spaceBetween: 10,
+    loop: false,
+    pagination: { el: '.swiper-pagination', clickable: true },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+}</code></pre>
+
+            <section class="case-study__section">
+                <h3>Conditional navigation injection</h3>
+                <p>The new bundle page link should appear in the Home Cover dropdown — but only after the user has
+                    visited a comparison PLP. Showing it cold to every visitor would change the navigation experience
+                    site-wide, which wasn't the test's intent.</p>
+                <p>The flag persists in <code>sessionStorage</code>, and desktop and mobile use different attach points
+                    because the host's nav structure differs between viewports — desktop uses a hover dropdown, mobile
+                    uses a slide-out drawer at <code>.navitem-8</code>.</p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">const newNavItem = `
+  &lt;li&gt;
+    &lt;a class="dropdown-item dropdown-item-link"
+       href="/insurance-cover/homeserve-premium-cover"
+       class="navlink"&gt;
+      HomeServe Premium Cover&lt;span class="caret"&gt;&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/li&gt;
+`;
+
+// Different attach points per viewport — desktop dropdown vs mobile drawer
+const attachPoint = !isMobile()
+  ? document.querySelector('.dropdown-menu ul:first-of-type &gt; li:nth-child(4)')
+  : document.querySelector('.navitem-8 ul:first-of-type &gt; li:nth-child(4)');
+
+if (attachPoint) {
+  attachPoint.insertAdjacentHTML('afterend', newNavItem);
+  sessionStorage.setItem('hs120nav', 'true');
+}</code></pre>
+
+            <section class="case-study__section">
+                <h3>Nav-position tracking via class injection</h3>
+                <p>One small but useful pattern: top-level nav items had no stable hooks for analytics — no
+                    <code>data-</code> attributes, no IDs. Rather than chasing nth-child selectors in event handlers,
+                    the experiment adds a numbered class (<code>navitem-1</code>, <code>navitem-2</code>, etc.) to every
+                    top-level nav item on first run. This gives both the experiment code and downstream analytics
+                    consistent hooks.</p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">// Tag every top-level nav item with its position
+const navItems = document.querySelectorAll('ul.nav &gt; li');
+navItems.forEach((item, index) =&gt; {
+  item.classList.add(`navitem-${index + 1}`);
+});
+
+// Now event handlers can use stable selectors
+document.body.addEventListener('click', (e) =&gt; {
+  const { target } = e;
+
+  if (target.closest('.navlink[href="/insurance-cover/homeserve-premium-cover"]')) {
+    fireEvent('User clicks on HomeServe Premium Cover link');
+  } else if (
+    target.closest('.navitem-2') ||
+    (target.closest('.navitem-8') &amp;&amp; isMobile())
+  ) {
+    fireEvent('User clicks on home cover link in main nav');
+  }
+});</code></pre>
+
+            <section class="case-study__section">
+                <h2>Acceptance criteria</h2>
+                <ul class="case-study__list">
+                    <li>Test runs on desktop, mobile, and tablet</li>
+                    <li>Targets three comparison PLPs: gas-and-boiler, plumbing-and-drainage, electrical</li>
+                    <li>One variation against control</li>
+                    <li>Gas Combo bundle products removed from all three PLPs</li>
+                    <li>Single-category products render cleanly in a 2-up grid layout</li>
+                    <li>Swiper carousel re-initialises without visual breakage</li>
+                    <li>New nav link to HomeServe Premium Cover appears in the Home Cover dropdown after visiting any
+                        comparison PLP</li>
+                    <li>Test code fired event surfaces on every user view of a comparison PLP</li>
+                </ul>
+            </section>
+
+            <section class="case-study__section">
+                <h2>Success metrics</h2>
+                <p>Primary metrics: <strong>PDP views from PLP</strong>, <strong>add-to-basket rate</strong>,
+                    <strong>bounce rate from PLP</strong>. Secondary tracking: clicks on the new nav link, views of the
+                    dedicated HomeServe Premium Cover PLP, and clicks on the existing Home Cover nav entry as a baseline
+                    reference.</p>
+            </section>
+
+            <section class="case-study__section">
+                <h2>Strategic context</h2>
+                <p>Aligned to the OKR 2 goal of increasing product views from comparison pages. The test reflects a
+                    strategic decision to optimise for renewal-rate health rather than headline conversion — a longer
+                    time horizon than a typical CRO test. Stakeholders accepted that this might suppress short-term
+                    revenue if it surfaced as a negative result, in exchange for a more sustainable long-term customer
+                    base.</p>
+            </section>
+
+            <section class="case-study__section">
+                <h2>Post-test analysis</h2>
+                <p class="case-study__placeholder">Results pending. This section will be updated with anonymised outcome
+                    highlights once the analysis is published and approved for share.</p>
+            </section>
+
+            <a href="/#work"
+               class="case-study__back">← Back to all work</a>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2026 Arafat. Freelance CRO developer.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+
+</html>

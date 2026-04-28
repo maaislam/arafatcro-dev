@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+    <title>SCR278 — Desktop search immersive UI | Arafat</title>
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com" />
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" />
+    <script type="module"
+            src="/src/scripts/main.js"></script>
+</head>
+
+<body class="case-study">
+    <header class="site-header">
+        <div class="container site-header__inner">
+            <a href="/"
+               class="site-header__logo">Arafat</a>
+            <nav class="site-header__nav"
+                 aria-label="Primary">
+                <a href="/#work">Work</a>
+                <a href="/#how-i-work">How I work</a>
+                <a href="/#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="case-study__main">
+        <div class="container">
+            <a href="/#work"
+               class="case-study__back">← Back to all work</a>
+
+            <header class="case-study__header">
+                <div class="case-study__meta">
+                    <span class="case-study__id">SCR278</span>
+                    <span class="case-study__platform">Optimizely Web</span>
+                    <span class="case-study__client-tag">Large UK home improvement retailer</span>
+                </div>
+                <h1>Desktop search immersive UI</h1>
+                <p class="case-study__lede">A two-variant test repositioning the desktop search overlay from vertical to
+                    landscape, with focus-state darkening and search-term-driven subcategories. Built as a full custom
+                    form replacement on a Next.js SPA.</p>
+            </header>
+
+            <section class="case-study__section">
+                <h2>The problem</h2>
+                <p>Desktop accounted for 36% of search traffic with a 21.2% CVR and £54.92 AOV. The existing search
+                    overlay was vertically oriented, conflicting with how users naturally scan content (left-to-right,
+                    F-pattern). Pre-test analysis identified four constraints in the current experience:</p>
+                <ul class="case-study__list">
+                    <li>Not visually immersive — the overlay didn't command focus</li>
+                    <li>No pre-input merchandising or category content</li>
+                    <li>No saved or recent search affordances</li>
+                    <li>Product suggestions were converting well and needed to be preserved</li>
+                </ul>
+            </section>
+
+            <section class="case-study__section">
+                <h2>The hypothesis</h2>
+                <blockquote class="case-study__quote">
+                    Because users read content horizontally, presenting the search overlay in a landscape format will
+                    result in higher engagement and increased SRP progression.
+                </blockquote>
+            </section>
+
+            <section class="case-study__section">
+                <h2>The solution</h2>
+                <p><strong>Variation 1 — Landscape layout.</strong> Search element repositioned to a horizontal overlay
+                    with two columns: search suggestions on the left and product recommendations on the right.
+                    Background darkens on focus to mirror the existing mobile pattern. Product recommendation logic
+                    preserved unchanged to isolate layout as the variable.</p>
+            </section>
+
+            <figure class="case-study__figure">
+                <img src="/work/scr278/v1-landscape.png"
+                     alt="Variation 1 — landscape layout with search suggestions and product recommendations"
+                     loading="lazy" />
+                <figcaption>Variation 1 — landscape layout with darkened focus state</figcaption>
+            </figure>
+
+            <section class="case-study__section">
+                <p><strong>Variation 2 — Landscape with subcategories.</strong> Builds on V1 by introducing a third
+                    column of search-term-driven category recommendations between suggestions and products. Users can
+                    refine to a category-filtered SRP without going through the full results page first. A "View all"
+                    CTA preserves the original path.</p>
+            </section>
+
+            <figure class="case-study__figure">
+                <img src="/work/scr278/v2-subcategories.png"
+                     alt="Variation 2 — adds a suggested categories column between search suggestions and product recommendations"
+                     loading="lazy" />
+                <figcaption>Variation 2 — adds search-term-driven subcategory navigation</figcaption>
+            </figure>
+
+            <section class="case-study__section">
+                <h2>Implementation</h2>
+                <p>Built as an Optimizely Web IIFE on a Next.js SPA. The variant injects a complete custom search form
+                    alongside the native one, hides the native form visually, and proxies submissions back to the
+                    original submit button — preserving the host's analytics and routing while owning the entire visual
+                    experience.</p>
+                <p>Folder structure followed the agency's standard component layout: separate handlers, components,
+                    helpers, with a single <code>experiment.js</code> entry point.</p>
+            </section>
+
+            <p class="case-study__code-caption">// Folder structure — handlers / components / helpers</p>
+            <pre class="case-study__code"><code class="language-text">SCR278/
+  src/
+    lib/
+      components/
+        customSearchForm.js
+        productSuggestion.js
+        searchIcon.js
+        skeletonLoader.js
+        spinner.js
+      handlers/
+        searchInputHandler.js
+        searchResultKeyHandler.js
+      helpers/
+        utils.js
+    experiment.js
+    _variables.scss
+    experiment.scss
+    triggers.js</code></pre>
+
+            <section class="case-study__section">
+                <h3>Custom form, native submit</h3>
+                <p>The variant injects a custom form before the native one, hides the native form, and on submit proxies
+                    the value into the native input and clicks the original submit button. The host's existing search
+                    routing and analytics fire untouched.</p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">// Inject custom form alongside the native one, hide the native form
+const controlSearchForm = document.querySelector('form:has(#keyword-search)');
+if (controlSearchForm) {
+  controlSearchForm.insertAdjacentHTML('beforebegin', customSearchForm());
+  controlSearchForm.style.display = 'none';
+}
+
+// Hide native dropdown so it doesn't compete with the custom overlay
+const nativeDropdown = document.querySelector('#search-suggestions-dropdown-wrapper');
+if (nativeDropdown) nativeDropdown.style.display = 'none';
+
+// Proxy submit through the native button — preserves host routing & analytics
+customForm.addEventListener('submit', (e) =&gt; {
+  e.preventDefault();
+  const query = customInput.value.trim();
+  const nativeSubmitBtn = document.querySelector('[data-qaid="search-button"]');
+
+  setSearchValue(query);
+  renderSpinner();
+  nativeSubmitBtn?.click();
+  trackEvent('Search Submitted');
+});</code></pre>
+
+            <section class="case-study__section">
+                <h3>Debounced input handler</h3>
+                <p>Search suggestion fetches debounce at 700ms — long enough to avoid hammering the suggestion API on
+                    every keystroke, short enough to feel responsive once the user stops typing.</p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">const SEARCH_DEBOUNCE_DELAY = 700;
+
+const debouncedHandler = debounce((e) =&gt; {
+  searchInputHandler(e, fetchSuggestions);
+}, SEARCH_DEBOUNCE_DELAY);
+
+inputElement.addEventListener('input', debouncedHandler);</code></pre>
+
+            <section class="case-study__section">
+                <h3>SPA-aware re-initialisation</h3>
+                <p>Because the host is a Next.js SPA, route changes don't reload the page — the experiment had to
+                    re-evaluate its conditions on every navigation. A custom <code>onUrlChange</code> helper wraps
+                    history events, then a poller waits for the data layer and SPA hydration before re-running init.</p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">// Re-init on every SPA route change
+onUrlChange(() =&gt; {
+  resetDom();
+  window.scr278ActiveIdx = -1;
+
+  pollerLite([
+    () =&gt; typeof window.tealiumDataLayer === 'object',
+    () =&gt; window.utag !== undefined,
+    () =&gt; window.__NEXT_DATA__ !== undefined
+  ], () =&gt; {
+    setTimeout(() =&gt; {
+      const input = document.querySelector('#keyword-search');
+      if (input) input.value = '';
+      init();
+    }, DOM_RENDER_DELAY);
+  });
+});</code></pre>
+
+            <section class="case-study__section">
+                <h3>Keyboard accessibility</h3>
+                <p>Arrow keys navigate suggestions, Escape closes the overlay, focus management ensures clicks outside
+                    the search element close it cleanly. <code>searchResultKeyHandler</code> centralises the keyboard
+                    logic so up/down arrow navigation and Enter-to-select work consistently.</p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">document.body.addEventListener('keydown', (event) =&gt; {
+  const { key, target } = event;
+
+  // Escape closes the overlay
+  if (key === 'Escape' &amp;&amp; target.id === `${ID}__keyword-search`) {
+    target.blur();
+    toggleSearchOverlay(false);
+    resetDom();
+  }
+
+  // Arrow-key navigation through suggestion list
+  if (target.id === `${ID}__keyword-search`) {
+    searchResultKeydownHandler(event);
+  }
+});</code></pre>
+
+            <section class="case-study__section">
+                <h3>Event tracking — Optimizely + GA4 dual-fire</h3>
+                <p>Every event fired into both Optimizely's native event system and GA4 via a shared helper. Analysts
+                    could pull from either side without parity issues.</p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">const trackEvent = (name) =&gt; {
+  fireEvent(name);
+  trackOptimizelyEvent(name);
+};
+
+// Standard events fired across all variations
+trackEvent('Conditions Met');
+trackEvent('Search Focus Activated');
+trackEvent('Search Suggestion Clicked');
+trackEvent('Product Recommendation Clicked');
+trackEvent('Category Recommendation Clicked'); // V2 only
+trackEvent('View All Clicked');                 // V2 only
+trackEvent('Overlay Closed');</code></pre>
+
+            <section class="case-study__section">
+                <h2>Acceptance criteria</h2>
+                <ul class="case-study__list">
+                    <li>Desktop only, sitewide where search is available</li>
+                    <li>Two variants — landscape, and landscape with subcategories</li>
+                    <li>Background darkens on search focus to create a clear focus state</li>
+                    <li>Existing product suggestion logic preserved across variants</li>
+                    <li>Subcategory and View All CTAs route to filtered SRPs (Variation 2)</li>
+                    <li>Overlay closes on outside click or Escape</li>
+                    <li>Conditions Met fires on every page load where search is present</li>
+                    <li>Event tracking dual-fires to Optimizely and GA4</li>
+                </ul>
+            </section>
+
+            <section class="case-study__section">
+                <h2>Outcome</h2>
+                <p>Pre-test modelling estimated a £1.23m annual opportunity assuming a 0.5% lift in desktop search
+                    traffic at consistent CVRs. Test ran sitewide on desktop.</p>
+            </section>
+
+            <section class="case-study__section">
+                <h2>Post-test analysis</h2>
+                <p class="case-study__placeholder">Results pending. This section will be updated with anonymised outcome
+                    highlights once the analysis is published and approved for share.</p>
+            </section>
+
+            <a href="/#work"
+               class="case-study__back">← Back to all work</a>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2026 Arafat. Freelance CRO developer.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+
+</html>

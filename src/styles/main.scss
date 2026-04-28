@@ -1,27 +1,15 @@
-// Abstracts (must come first)
 @use 'abstracts/variables';
-@use 'abstracts/mixins';
-
-// Base
 @use 'base/reset';
 @use 'base/typography';
 @use 'base/global';
-
-// Layout
 @use 'layout/container';
 @use 'layout/header';
 @use 'layout/footer';
-
-// Components
 @use 'components/button';
 @use 'components/card';
-@use 'components/code-block';
-
-// Sections
 @use 'sections/hero';
 @use 'sections/work';
 @use 'sections/how-i-work';
 @use 'sections/clients';
-
-// Pages
+@use 'sections/contact';
 @use 'pages/case-study';

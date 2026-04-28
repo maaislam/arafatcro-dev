@@ -1,0 +1,23 @@
+@use '../abstracts/variables' as *;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-3 $space-5;
+  border-radius: $radius-md;
+  font-weight: 500;
+  font-size: $fs-sm;
+  font-family: $font-mono;
+  transition: all $transition-base;
+
+  &--primary {
+    background: $color-accent;
+    color: $color-bg;
+
+    &:hover {
+      background: $color-accent-hover;
+      transform: translateY(-1px);
+    }
+  }
+}

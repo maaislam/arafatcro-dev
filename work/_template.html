@@ -1,0 +1,224 @@
+<!--
+  CASE STUDY TEMPLATE
+  ===================
+  Copy this file, rename to /work/[id]-[slug].html, then find-and-replace:
+
+  Required swaps:
+    [PAGE_TITLE]      → e.g. "Desktop search immersive UI"
+    [ID]              → e.g. "SCR289"
+    [PLATFORM]        → e.g. "Optimizely Web" / "Adobe Target" / "Convert.com"
+    [CLIENT_TAG]      → e.g. "Large UK home improvement retailer"
+    [LEDE]            → 1-2 sentence summary that hooks the reader
+    [HERO_IMAGE_PATH] → e.g. "/work/scr281/hero.png"
+    [HERO_ALT]        → descriptive alt text
+    [SLUG]            → folder name under /public/work/ (e.g. "scr281")
+
+  Then fill in each section. Delete sections you don't need.
+  Always keep the post-test analysis placeholder.
+
+  Image path convention:
+    public/work/[slug]/hero.png
+    public/work/[slug]/v1-layout.png
+    etc.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+    <title>[ID] — [PAGE_TITLE] | Arafat</title>
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com" />
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" />
+    <script type="module"
+            src="/src/scripts/main.js"></script>
+</head>
+
+<body class="case-study">
+    <header class="site-header">
+        <div class="container site-header__inner">
+            <a href="/"
+               class="site-header__logo">Arafat</a>
+            <nav class="site-header__nav"
+                 aria-label="Primary">
+                <a href="/#work">Work</a>
+                <a href="/#how-i-work">How I work</a>
+                <a href="/#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="case-study__main">
+        <div class="container">
+            <a href="/#work"
+               class="case-study__back">← Back to all work</a>
+
+            <header class="case-study__header">
+                <div class="case-study__meta">
+                    <span class="case-study__id">[ID]</span>
+                    <span class="case-study__platform">[PLATFORM]</span>
+                    <span class="case-study__client-tag">[CLIENT_TAG]</span>
+                </div>
+                <h1>[PAGE_TITLE]</h1>
+                <p class="case-study__lede">[LEDE]</p>
+            </header>
+
+            <!-- HERO IMAGE — single screenshot setting visual context -->
+            <figure class="case-study__hero-image">
+                <img src="[HERO_IMAGE_PATH]"
+                     alt="[HERO_ALT]"
+                     loading="lazy" />
+            </figure>
+
+            <!-- THE PROBLEM — what was wrong, with data if available -->
+            <section class="case-study__section">
+                <h2>The problem</h2>
+                <p>[Describe the problem in 2-3 paragraphs. Include real numbers if you have them — traffic share,
+                    conversion rate, AOV, etc. Reference the user behaviour that motivated the test.]</p>
+
+                <ul class="case-study__list">
+                    <li>[Constraint or insight 1]</li>
+                    <li>[Constraint or insight 2]</li>
+                    <li>[Constraint or insight 3]</li>
+                </ul>
+            </section>
+
+            <!-- THE HYPOTHESIS — the actual stakeholder framing if available -->
+            <section class="case-study__section">
+                <h2>The hypothesis</h2>
+                <blockquote class="case-study__quote">
+                    [The hypothesis statement, ideally close to the original brief wording. Format: "Because [insight],
+                    we believe [change] will result in [outcome]."]
+                </blockquote>
+            </section>
+
+            <!-- THE SOLUTION — narrative description of variants -->
+            <section class="case-study__section">
+                <h2>The solution</h2>
+                <p><strong>Variation 1 — [V1 NAME].</strong> [Describe what V1 does, what's different vs control.]</p>
+            </section>
+
+            <figure class="case-study__figure">
+                <img src="/work/[SLUG]/v1-layout.png"
+                     alt="[V1 description]"
+                     loading="lazy" />
+                <figcaption>Variation 1 — [short caption]</figcaption>
+            </figure>
+
+            <section class="case-study__section">
+                <p><strong>Variation 2 — [V2 NAME].</strong> [Describe what V2 does, what's different vs V1.]</p>
+            </section>
+
+            <figure class="case-study__figure">
+                <img src="/work/[SLUG]/v2-layout.png"
+                     alt="[V2 description]"
+                     loading="lazy" />
+                <figcaption>Variation 2 — [short caption]</figcaption>
+            </figure>
+
+            <!-- IMPLEMENTATION — overview paragraph + folder structure -->
+            <section class="case-study__section">
+                <h2>Implementation</h2>
+                <p>[1-2 paragraphs on the technical approach, host stack, key constraints. Mention the platform and any
+                    architectural decisions that shaped the build.]</p>
+            </section>
+
+            <p class="case-study__code-caption">// Folder structure</p>
+            <pre class="case-study__code"><code class="language-text">[ID]/
+  src/
+    lib/
+      components/
+        [component-1].js
+        [component-2].js
+      handlers/
+        [handler-1].js
+      helpers/
+        utils.js
+    experiment.js
+    _variables.scss
+    experiment.scss
+    triggers.js</code></pre>
+
+            <!-- TECHNICAL DEEP-DIVES — repeat this pattern 2-4 times for the interesting bits -->
+            <section class="case-study__section">
+                <h3>[Technical pattern 1 name]</h3>
+                <p>[1-2 paragraphs explaining what this code solves and why this approach. Be specific — name the
+                    constraint, not just the solution.]</p>
+            </section>
+
+            <p class="case-study__code-caption">// [Short caption describing what the snippet shows]</p>
+            <pre class="case-study__code"><code class="language-javascript">// Paste sanitized code snippet here
+// Keep it 15-25 lines — the interesting bit, not the whole file
+// Sanitize: rename client-specific functions, strip secrets, anonymize URLs
+// Keep: data-qaid attrs, real selectors, real patterns — they signal authenticity</code></pre>
+
+            <section class="case-study__section">
+                <h3>[Technical pattern 2 name]</h3>
+                <p>[Explain.]</p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">// Snippet 2</code></pre>
+
+            <section class="case-study__section">
+                <h3>[Technical pattern 3 name]</h3>
+                <p>[Explain.]</p>
+            </section>
+
+            <pre class="case-study__code"><code class="language-javascript">// Snippet 3</code></pre>
+
+            <!-- ACCEPTANCE CRITERIA — pulled from the brief verbatim where possible -->
+            <section class="case-study__section">
+                <h2>Acceptance criteria</h2>
+                <ul class="case-study__list">
+                    <li>[Criterion 1]</li>
+                    <li>[Criterion 2]</li>
+                    <li>[Criterion 3]</li>
+                    <li>[Criterion 4]</li>
+                </ul>
+            </section>
+
+            <!-- SUCCESS METRICS — primary + secondary metrics -->
+            <section class="case-study__section">
+                <h2>Success metrics</h2>
+                <p>Primary metric: <strong>[primary metric]</strong>. Secondary metrics: [list secondary metrics,
+                    comma-separated].</p>
+            </section>
+
+            <!-- OUTCOME — anything you can share about scope, traffic, modelling -->
+            <section class="case-study__section">
+                <h2>Outcome</h2>
+                <p>[Pre-test forecast / scope of rollout / traffic context. Anything quantitative you can share without
+                    revealing results. If nothing, delete this section.]</p>
+            </section>
+
+            <!-- POST-TEST ANALYSIS — keep the placeholder until results are public -->
+            <section class="case-study__section">
+                <h2>Post-test analysis</h2>
+                <p class="case-study__placeholder">Results pending. This section will be updated with anonymised outcome
+                    highlights once the analysis is published and approved for share.</p>
+            </section>
+
+            <a href="/#work"
+               class="case-study__back">← Back to all work</a>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2026 Arafat. Freelance CRO developer.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</body>
+
+</html>

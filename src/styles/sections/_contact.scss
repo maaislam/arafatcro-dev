@@ -1,0 +1,30 @@
+@use '../abstracts/variables' as *;
+
+.contact {
+  padding-block: $space-9;
+  border-top: 1px solid $color-border;
+
+  &__lede {
+    font-size: $fs-md;
+    color: $color-text-muted;
+    max-width: 60ch;
+    margin-bottom: $space-6;
+  }
+
+  &__links {
+    display: flex;
+    align-items: center;
+    gap: $space-5;
+    flex-wrap: wrap;
+  }
+
+  &__secondary {
+    color: $color-text-muted;
+    font-size: $fs-sm;
+    font-family: $font-mono;
+
+    &:hover {
+      color: $color-text;
+    }
+  }
+}

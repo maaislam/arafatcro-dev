@@ -1,0 +1,21 @@
+@use '../abstracts/variables' as *;
+
+body {
+  background: $color-bg;
+}
+
+::selection {
+  background: $color-accent;
+  color: $color-bg;
+}
+
+.section__title {
+  margin-bottom: $space-4;
+}
+
+.section__lede {
+  color: $color-text-muted;
+  font-size: $fs-md;
+  max-width: 60ch;
+  margin-bottom: $space-7;
+}

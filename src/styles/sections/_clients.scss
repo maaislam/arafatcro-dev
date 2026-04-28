@@ -1,0 +1,13 @@
+@use '../abstracts/variables' as *;
+
+.clients {
+  padding-block: $space-9;
+  border-top: 1px solid $color-border;
+
+  &__list {
+    font-size: $fs-md;
+    color: $color-text-muted;
+    line-height: 1.7;
+    max-width: 70ch;
+  }
+}

@@ -1,0 +1,132 @@
+@use '../abstracts/variables' as *;
+
+.case-study {
+  &__main {
+    padding-block: $space-7 $space-9;
+  }
+
+  &__back {
+    display: inline-block;
+    color: $color-text-muted;
+    font-size: $fs-sm;
+    font-family: $font-mono;
+    margin-bottom: $space-6;
+
+    &:hover {
+      color: $color-accent;
+    }
+  }
+
+  &__header {
+    margin-bottom: $space-8;
+    padding-bottom: $space-7;
+    border-bottom: 1px solid $color-border;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    font-family: $font-mono;
+    font-size: $fs-xs;
+    color: $color-text-dim;
+    margin-bottom: $space-4;
+    flex-wrap: wrap;
+  }
+
+  &__id {
+    color: $color-accent;
+    font-weight: 500;
+  }
+
+  &__platform,
+  &__client-tag {
+    padding: 2px $space-2;
+    background: $color-bg-elevated;
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+  }
+
+  &__lede {
+    font-size: $fs-md;
+    color: $color-text-muted;
+    max-width: 65ch;
+    margin-top: $space-4;
+    line-height: 1.6;
+  }
+
+  &__section {
+    margin-bottom: $space-7;
+    max-width: 70ch;
+
+    h2 {
+      font-size: $fs-lg;
+      margin-bottom: $space-4;
+    }
+    h3 {
+      font-size: $fs-md;
+      margin-block: $space-5 $space-3;
+      color: $color-text;
+    }
+
+    p {
+      color: $color-text-muted;
+      line-height: 1.75;
+      margin-bottom: $space-3;
+
+      strong {
+        color: $color-text;
+      }
+    }
+  }
+
+  &__list {
+    color: $color-text-muted;
+    line-height: 1.75;
+    margin-bottom: $space-3;
+    padding-left: $space-5;
+    list-style: disc;
+
+    li {
+      margin-bottom: $space-2;
+    }
+  }
+
+  &__quote {
+    font-size: $fs-md;
+    line-height: 1.6;
+    color: $color-text;
+    border-left: 3px solid $color-accent;
+    padding-left: $space-4;
+    margin-block: $space-4;
+    font-style: italic;
+  }
+
+  &__code {
+    background: $color-code-bg;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    padding: $space-4;
+    overflow-x: auto;
+    margin-block: $space-4;
+
+    code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: $fs-xs;
+      line-height: 1.6;
+      color: $color-text;
+    }
+  }
+  &__placeholder {
+    display: inline-block;
+    padding: $space-3 $space-4;
+    background: $color-bg-elevated;
+    border: 1px dashed $color-border-strong;
+    border-radius: $radius-md;
+    color: $color-text-muted;
+    font-size: $fs-sm;
+    font-style: italic;
+  }
+}
