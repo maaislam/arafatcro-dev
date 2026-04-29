@@ -28,8 +28,48 @@
   }
 
   &__id {
+    padding: 2px $space-2;
     color: $color-accent;
     font-weight: 500;
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+
+    &.card__client-tag {
+      &--screwfix {
+        background: $brand-screwfix;
+        color: #fff;
+      }
+
+      &--luxury-flooring {
+        background: $brand-luxury-flooring;
+        color: #fff;
+      }
+
+      &--homeserve {
+        background: $brand-homeserve;
+        color: #fff;
+      }
+
+      &--avon {
+        background: $brand-avon;
+        color: #fff;
+      }
+
+      &--travis-perkins {
+        background: $brand-travis-perkins;
+        color: #fff;
+      }
+
+      &--sp-global {
+        background: $brand-sp-global;
+        color: #fff;
+      }
+
+      &--howdens {
+        background: $brand-howdens;
+        color: #fff;
+      }
+    }
   }
 
   &__platform {
@@ -66,6 +106,12 @@
       background: $platform-monetate;
       color: #fff;
       border-color: $platform-monetate;
+    }
+
+    &--webtrends {
+      background: $platform-webtrends;
+      color: #fff;
+      border-color: $platform-webtrends;
     }
   }
 
