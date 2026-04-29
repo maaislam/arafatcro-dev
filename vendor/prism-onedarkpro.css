@@ -180,4 +180,20 @@ pre[class*="language-"] {
 }
 
 .language-css .token.important,
-.language-css .token.atrule .toke
+.language-css .token.atrule .token.rule {
+    color: #c678dd;
+}
+
+/* Bold/italic */
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
