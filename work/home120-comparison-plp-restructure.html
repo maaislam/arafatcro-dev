@@ -16,7 +16,7 @@
           href="https://fonts.gstatic.com"
           crossorigin />
     <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" />
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" />
     <script type="module"
@@ -44,8 +44,8 @@
 
             <header class="case-study__header">
                 <div class="case-study__meta">
-                    <span class="case-study__id">HOME120</span>
-                    <span class="case-study__platform">Optimizely Web</span>
+                    <span class="case-study__client-tag case-study__client-tag--homeserve">HomeServe</span>
+                    <span class="case-study__platform case-study__platform--webtrends">webtrends optimize</span>
                     <span class="case-study__client-tag">UK home insurance provider</span>
                 </div>
                 <h1>Comparison PLP — bundle product removal</h1>
@@ -55,7 +55,7 @@
                     visit.</p>
             </header>
 
-            <figure class="case-study__hero-image">
+            <figure class="case-study__hero-image hs">
                 <img src="/work/home120/comparison-plp.png"
                      alt="Heating insurance comparison PLP showing single-category cover cards in a swipeable carousel"
                      loading="lazy" />
@@ -125,7 +125,8 @@
                     price, or layout position, all of which the host could change without notice.</p>
                 <p>Once matched, the bundle's promo box is hidden and removed from the Swiper slide pool so it doesn't
                     take up a slot in the carousel. The parent grid container's class is swapped from
-                    <code>grid-33x3</code> to <code>grid-50x2</code> to render cleanly with the smaller item count.</p>
+                    <code>grid-33x3</code> to <code>grid-50x2</code> to render cleanly with the smaller item count.
+                </p>
             </section>
 
             <pre class="case-study__code"><code class="language-javascript">const itemsToHide = [
@@ -159,7 +160,8 @@ itemsToHide.forEach((href) =&gt; {
                     visibly broken carousel.</p>
                 <p>The fix is straightforward but easy to miss: walk every <code>.swiper</code> on the page, call
                     <code>destroy(true, true)</code> to clean up styles and event listeners, null out the instance, then
-                    construct a fresh Swiper with the new slide configuration.</p>
+                    construct a fresh Swiper with the new slide configuration.
+                </p>
             </section>
 
             <pre class="case-study__code"><code class="language-javascript">if (hasSwiper()) {
@@ -223,7 +225,8 @@ if (attachPoint) {
                     <code>data-</code> attributes, no IDs. Rather than chasing nth-child selectors in event handlers,
                     the experiment adds a numbered class (<code>navitem-1</code>, <code>navitem-2</code>, etc.) to every
                     top-level nav item on first run. This gives both the experiment code and downstream analytics
-                    consistent hooks.</p>
+                    consistent hooks.
+                </p>
             </section>
 
             <pre class="case-study__code"><code class="language-javascript">// Tag every top-level nav item with its position
@@ -266,7 +269,8 @@ document.body.addEventListener('click', (e) =&gt; {
                 <p>Primary metrics: <strong>PDP views from PLP</strong>, <strong>add-to-basket rate</strong>,
                     <strong>bounce rate from PLP</strong>. Secondary tracking: clicks on the new nav link, views of the
                     dedicated HomeServe Premium Cover PLP, and clicks on the existing Home Cover nav entry as a baseline
-                    reference.</p>
+                    reference.
+                </p>
             </section>
 
             <section class="case-study__section">
@@ -278,7 +282,7 @@ document.body.addEventListener('click', (e) =&gt; {
                     base.</p>
             </section>
 
-            <section class="case-study__section">
+            <section class="case-study__section  post-test-analysis">
                 <h2>Post-test analysis</h2>
                 <p class="case-study__placeholder">Results pending. This section will be updated with anonymised outcome
                     highlights once the analysis is published and approved for share.</p>
@@ -295,6 +299,8 @@ document.body.addEventListener('click', (e) =&gt; {
         </div>
     </footer>
 
+    <link rel="stylesheet"
+          href="/vendor/prism-onedarkpro.css" />
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>

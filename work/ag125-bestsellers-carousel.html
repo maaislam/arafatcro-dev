@@ -16,7 +16,7 @@
           href="https://fonts.gstatic.com"
           crossorigin />
     <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" />
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" />
     <script type="module"
@@ -44,8 +44,8 @@
 
             <header class="case-study__header">
                 <div class="case-study__meta">
-                    <span class="case-study__id">AG125</span>
-                    <span class="case-study__platform">Dynamic Yield</span>
+                    <span class="case-study__client-tag case-study__client-tag--avon">Avon</span>
+                    <span class="case-study__platform case-study__platform--dynamic-yield">Dynamic Yield</span>
                     <span class="case-study__client-tag">Global cosmetics retailer (Romania)</span>
                 </div>
                 <h1>Bestsellers carousel — homepage social proof</h1>
@@ -53,10 +53,11 @@
                     Dynamic Yield: a 19-product bestsellers carousel with a desktop variant-selector dropdown, a mobile
                     bottom-sheet variant picker, and inline add-to-bag through the host's
                     <code>CartServiceModule</code>. Visibility-gated impression events on both control and variant for
-                    clean exposure measurement.</p>
+                    clean exposure measurement.
+                </p>
             </header>
 
-            <figure class="case-study__hero-image">
+            <figure class="case-study__hero-image hs">
                 <img src="/work/ag125/control-vs-variant.png"
                      alt="Side-by-side comparison of the Control homepage and Variation 1 with a four-product bestsellers carousel injected above the existing modules"
                      loading="lazy" />
@@ -91,7 +92,8 @@
                         the card's preview image and rebinds the add-to-bag SKU.</li>
                     <li><strong>Inline add-to-bag</strong> — clicking the CTA submits through Avon's
                         <code>CartServiceModule</code> directly, bypassing a PDP visit. The page scrolls to top so the
-                        host's mini-cart UI updates in view.</li>
+                        host's mini-cart UI updates in view.
+                    </li>
                 </ul>
                 <p>Both control and variant fire impression events through the same IntersectionObserver pattern —
                     control on the header element, variant on the carousel wrapper — so exposure measurement is
@@ -111,7 +113,8 @@
                     <code>window.DY</code> object (different anchor points for desktop vs mobile/tablet),
                     IntersectionObserver-gated "Conditions Met" firing on both control and variant, a desktop dropdown /
                     mobile bottom-sheet variant picker with synced state, and AJAX add-to-bag through the host's
-                    existing cart service.</p>
+                    existing cart service.
+                </p>
             </section>
 
             <p class="case-study__code-caption">// Folder structure</p>
@@ -291,7 +294,8 @@ if (target.closest(`.${ID}__variant-item`)) {
                 <p>One <code>document.body</code> click listener handles every carousel interaction: variant clicks,
                     add-to-bag, dropdown open, mobile variant selection, and outside-click dismissal. The catch-all
                     <code>else { closeDropdown() }</code> handles outside clicks naturally — no separate document-level
-                    dismiss listener, no event-bubbling gymnastics, no risk of stale handlers across re-renders.</p>
+                    dismiss listener, no event-bubbling gymnastics, no risk of stale handlers across re-renders.
+                </p>
             </section>
 
             <pre class="case-study__code"><code class="language-javascript">document.body.addEventListener('click', (e) =&gt; {
@@ -352,7 +356,7 @@ if (target.closest(`.${ID}__variant-item`)) {
                     timeline.</p>
             </section>
 
-            <section class="case-study__section">
+            <section class="case-study__section  post-test-analysis">
                 <h2>Post-test analysis</h2>
                 <p class="case-study__placeholder">Results pending. This section will be updated with anonymised outcome
                     highlights once the analysis is published and approved for share.</p>
@@ -369,6 +373,8 @@ if (target.closest(`.${ID}__variant-item`)) {
         </div>
     </footer>
 
+    <link rel="stylesheet"
+          href="/vendor/prism-onedarkpro.css" />
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>

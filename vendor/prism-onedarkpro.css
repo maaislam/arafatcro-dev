@@ -1,0 +1,183 @@
+/* One Dark Pro Vivid — Prism theme
+   Matched to arafat's actual VS Code editor */
+
+code[class*="language-"],
+pre[class*="language-"] {
+    color: #abb2bf;
+    background: none;
+    font-family: 'Fira Code', 'Menlo', 'Monaco', monospace;
+    font-feature-settings: 'liga'1, 'calt'1;
+    font-size: 0.9em;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.6;
+    tab-size: 2;
+    hyphens: none;
+}
+
+/* Block code — Vivid uses a deeper, slightly bluer background */
+pre[class*="language-"] {
+    padding: 1.25em 1.5em;
+    margin: 0.5em 0;
+    overflow: auto;
+    background: #1e2227;
+    border-radius: 8px;
+}
+
+/* Inline code */
+:not(pre)>code[class*="language-"] {
+    padding: 0.1em 0.3em;
+    border-radius: 0.3em;
+    white-space: normal;
+    background: #1e2227;
+}
+
+/* === TOKEN COLORS === */
+
+/* Comments — italic, slightly more visible than standard */
+.token.comment,
+.token.prolog,
+.token.cdata {
+    color: #7f848e;
+    font-style: italic;
+}
+
+.token.doctype,
+.token.punctuation {
+    color: #abb2bf;
+}
+
+/* Keywords — vivid purple */
+.token.keyword,
+.token.keyword.module,
+.token.keyword.control-flow {
+    color: #c678dd;
+    font-style: italic;
+}
+
+/* `new`, `return`, `if`, `else`, `const`, `let`, `var`, `function`, `export`, `default`, `import` — keywords */
+
+/* Class names and constructors — yellow */
+.token.class-name,
+.token.maybe-class-name {
+    color: #e5c07b;
+}
+
+/* Numbers, booleans, null, undefined — orange/coral (Vivid pushes these warmer) */
+.token.number,
+.token.boolean,
+.token.constant {
+    color: #d19a66;
+}
+
+/* Strings — vivid green */
+.token.string,
+.token.template-string,
+.token.string-property {
+    color: #98c379;
+}
+
+/* Template literal punctuation (backticks) */
+.token.template-punctuation {
+    color: #98c379;
+}
+
+/* Template literal interpolation — ${...} renders as keyword purple */
+.token.interpolation {
+    color: #abb2bf;
+}
+
+.token.interpolation-punctuation {
+    color: #c678dd;
+}
+
+/* Properties (object keys, .property access) — red/coral */
+.token.property,
+.token.property-access,
+.token.tag {
+    color: #e06c75;
+}
+
+/* Function names and method calls — blue */
+.token.function,
+.token.function-variable,
+.token.method {
+    color: #61afef;
+}
+
+/* Operators — light grey, slightly red on certain ones */
+.token.operator,
+.token.arrow {
+    color: #56b6c2;
+}
+
+/* Variables — light coral (slight tint, not full red) */
+.token.parameter,
+.token.variable {
+    color: #e06c75;
+}
+
+/* Built-ins like `document`, `window`, `console`, `Math` — coral, slightly different from properties */
+.token.builtin {
+    color: #e06c75;
+}
+
+/* Regex */
+.token.regex {
+    color: #56b6c2;
+}
+
+/* URLs (in CSS) */
+.token.url {
+    color: #56b6c2;
+}
+
+/* Tag attributes (HTML/JSX attributes) */
+.token.attr-name {
+    color: #d19a66;
+}
+
+.token.attr-value,
+.token.attr-value>.token.punctuation {
+    color: #98c379;
+}
+
+/* Important / bold modifiers */
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+/* === LANGUAGE-SPECIFIC === */
+
+/* CSS */
+.language-css .token.selector {
+    color: #e06c75;
+}
+
+.language-css .token.property {
+    color: #d19a66;
+}
+
+.language-css .token.function,
+.language-css .token.url>.token.function {
+    color: #56b6c2;
+}
+
+.language-css .token.url>.token.string.url {
+    color: #98c379;
+}
+
+.language-css .token.important,
+.language-css .token.atrule .toke

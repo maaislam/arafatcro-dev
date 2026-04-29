@@ -6,117 +6,117 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0" />
-    <title>TP283 — Trade-price prominence | Arafat</title>
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com" />
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin />
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" />
-    <script type="module"
-            src="/src/scripts/main.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0" />
+  <title>TP283 — Trade-price prominence | Arafat</title>
+  <link rel="preconnect"
+        href="https://fonts.googleapis.com" />
+  <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin />
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" />
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" />
+  <script type="module"
+          src="/src/scripts/main.js"></script>
 </head>
 
 <body class="case-study">
-    <header class="site-header">
-        <div class="container site-header__inner">
-            <a href="/"
-               class="site-header__logo">Arafat</a>
-            <nav class="site-header__nav"
-                 aria-label="Primary">
-                <a href="/#work">Work</a>
-                <a href="/#how-i-work">How I work</a>
-                <a href="/#contact">Contact</a>
-            </nav>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a href="/"
+         class="site-header__logo">Arafat</a>
+      <nav class="site-header__nav"
+           aria-label="Primary">
+        <a href="/#work">Work</a>
+        <a href="/#how-i-work">How I work</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="case-study__main">
+    <div class="container">
+      <a href="/#work"
+         class="case-study__back">← Back to all work</a>
+
+      <header class="case-study__header">
+        <div class="case-study__meta">
+          <span class="case-study__client-tag case-study__client-tag--travis-perkins">Travis Perkins</span>
+          <span class="case-study__platform case-study__platform--monetate">Monetate</span>
+          <span class="case-study__client-tag">UK builders' merchant</span>
         </div>
-    </header>
+        <h1>Trade-price prominence — account-creation lift</h1>
+        <p class="case-study__lede">A two-state PLP and PDP test on a builders' merchant site: replace the
+          host's separate trade-price block with a unified price banner showing retail and trade side-by-side,
+          gated to logged-out users only, with a click opening the host's own login form embedded in a modal
+          alongside a "create an account" CTA.</p>
+      </header>
 
-    <main class="case-study__main">
-        <div class="container">
-            <a href="/#work"
-               class="case-study__back">← Back to all work</a>
+      <figure class="case-study__hero-image">
+        <img src="/work/tp283/control-vs-variant.png"
+             alt="Side-by-side comparison of Control PDP/PLP with separate trade-price block and Variation 1 with unified price banner showing retail and trade together"
+             loading="lazy" />
+      </figure>
 
-            <header class="case-study__header">
-                <div class="case-study__meta">
-                    <span class="case-study__id">TP283</span>
-                    <span class="case-study__platform">Monetate</span>
-                    <span class="case-study__client-tag">UK builders' merchant</span>
-                </div>
-                <h1>Trade-price prominence — account-creation lift</h1>
-                <p class="case-study__lede">A two-state PLP and PDP test on a builders' merchant site: replace the
-                    host's separate trade-price block with a unified price banner showing retail and trade side-by-side,
-                    gated to logged-out users only, with a click opening the host's own login form embedded in a modal
-                    alongside a "create an account" CTA.</p>
-            </header>
+      <section class="case-study__section">
+        <h2>The problem</h2>
+        <p>Trade pricing on the host's PLPs and PDPs lived in a separate block beneath the retail price. The
+          visual hierarchy made it easy for a logged-out user to skim past the trade price entirely, which
+          weakened the incentive to create a trade account — the conversion event that mattered most for this
+          user segment.</p>
+        <p>Earlier attempts had increased trade-account creation through promotion of the cheaper price, but in
+          the current journey the prices were physically separated on the page. Comparing the two required
+          visual effort, and the site wasn't doing the work for the user.</p>
+      </section>
 
-            <figure class="case-study__hero-image">
-                <img src="/work/tp283/control-vs-variant.png"
-                     alt="Side-by-side comparison of Control PDP/PLP with separate trade-price block and Variation 1 with unified price banner showing retail and trade together"
-                     loading="lazy" />
-            </figure>
+      <section class="case-study__section">
+        <h2>The hypothesis</h2>
+        <blockquote class="case-study__quote">
+          We believe that making the messaging for trade price as prominent as the retail price for all users
+          not signed in to an account will result in increased trade account creations. This is due to the
+          price being more easily comparable as it is in the same size and in the same location as the retail
+          price.
+        </blockquote>
+      </section>
 
-            <section class="case-study__section">
-                <h2>The problem</h2>
-                <p>Trade pricing on the host's PLPs and PDPs lived in a separate block beneath the retail price. The
-                    visual hierarchy made it easy for a logged-out user to skim past the trade price entirely, which
-                    weakened the incentive to create a trade account — the conversion event that mattered most for this
-                    user segment.</p>
-                <p>Earlier attempts had increased trade-account creation through promotion of the cheaper price, but in
-                    the current journey the prices were physically separated on the page. Comparing the two required
-                    visual effort, and the site wasn't doing the work for the user.</p>
-            </section>
+      <section class="case-study__section">
+        <h2>The solution</h2>
+        <p>Variation 1 makes three coordinated changes for logged-out users on PLPs and PDPs:</p>
+        <ul class="case-study__list">
+          <li><strong>Unified price banner</strong> — a single component shows retail and trade pricing
+            side-by-side at equal visual weight. The host's existing separate trade-price block is hidden.
+          </li>
+          <li><strong>Banner click opens a login modal</strong> — embedded with the host's own login form via
+            <code>window.TP.renderLoginForm</code>, alongside a "create an account" link to the signup page.
+          </li>
+          <li><strong>Logged-in users see no change</strong> — a cookie check skips the experiment for
+            authenticated users entirely, since the trade price is already their default.</li>
+        </ul>
+        <p>The banner is added to every product card on the PLP grid and once on each PDP, with a
+          duplicate-render guard to handle pagination clicks and SPA route changes cleanly.</p>
+      </section>
 
-            <section class="case-study__section">
-                <h2>The hypothesis</h2>
-                <blockquote class="case-study__quote">
-                    We believe that making the messaging for trade price as prominent as the retail price for all users
-                    not signed in to an account will result in increased trade account creations. This is due to the
-                    price being more easily comparable as it is in the same size and in the same location as the retail
-                    price.
-                </blockquote>
-            </section>
+      <figure class="case-study__figure">
+        <img src="/work/tp283/variation-detail.png"
+             alt="Variation 1 detail showing the unified price banner with retail price and trade price side-by-side, plus the login modal opened on banner click"
+             loading="lazy" />
+        <figcaption>Variation 1 — unified price banner on PDP and PLP, with the login modal opened on banner
+          click</figcaption>
+      </figure>
 
-            <section class="case-study__section">
-                <h2>The solution</h2>
-                <p>Variation 1 makes three coordinated changes for logged-out users on PLPs and PDPs:</p>
-                <ul class="case-study__list">
-                    <li><strong>Unified price banner</strong> — a single component shows retail and trade pricing
-                        side-by-side at equal visual weight. The host's existing separate trade-price block is hidden.
-                    </li>
-                    <li><strong>Banner click opens a login modal</strong> — embedded with the host's own login form via
-                        <code>window.TP.renderLoginForm</code>, alongside a "create an account" link to the signup page.
-                    </li>
-                    <li><strong>Logged-in users see no change</strong> — a cookie check skips the experiment for
-                        authenticated users entirely, since the trade price is already their default.</li>
-                </ul>
-                <p>The banner is added to every product card on the PLP grid and once on each PDP, with a
-                    duplicate-render guard to handle pagination clicks and SPA route changes cleanly.</p>
-            </section>
+      <section class="case-study__section">
+        <h2>Implementation</h2>
+        <p>Three patterns shaped the build: cookie-based authentication gating to ensure the experiment runs
+          only for the relevant audience, surgical DOM editing of the host's existing price elements (clone,
+          modify, hide originals — preserve all the host's bound behaviour), and integration with the host's
+          identity SDK so the embedded login form behaves identically to the native one.</p>
+      </section>
 
-            <figure class="case-study__figure">
-                <img src="/work/tp283/variation-detail.png"
-                     alt="Variation 1 detail showing the unified price banner with retail price and trade price side-by-side, plus the login modal opened on banner click"
-                     loading="lazy" />
-                <figcaption>Variation 1 — unified price banner on PDP and PLP, with the login modal opened on banner
-                    click</figcaption>
-            </figure>
-
-            <section class="case-study__section">
-                <h2>Implementation</h2>
-                <p>Three patterns shaped the build: cookie-based authentication gating to ensure the experiment runs
-                    only for the relevant audience, surgical DOM editing of the host's existing price elements (clone,
-                    modify, hide originals — preserve all the host's bound behaviour), and integration with the host's
-                    identity SDK so the embedded login form behaves identically to the native one.</p>
-            </section>
-
-            <p class="case-study__code-caption">// Folder structure</p>
-            <pre class="case-study__code"><code class="language-text">TP283/
+      <p class="case-study__code-caption">// Folder structure</p>
+      <pre class="case-study__code"><code class="language-text">TP283/
   src/
     lib/
       components/
@@ -128,16 +128,17 @@
     experiment.scss
     triggers.js</code></pre>
 
-            <section class="case-study__section">
-                <h3>Authentication gating via cookie check</h3>
-                <p>The host stores an <code>access_token</code> cookie when a user is signed in. The experiment reads it
-                    on init — if present, the variant is skipped entirely and the experiment classes are removed from
-                    <code>&lt;html&gt;</code>. This keeps logged-in users on their existing experience (where trade
-                    pricing is already default) and ensures the analytics segment matches the test population the brief
-                    intended.</p>
-            </section>
+      <section class="case-study__section">
+        <h3>Authentication gating via cookie check</h3>
+        <p>The host stores an <code>access_token</code> cookie when a user is signed in. The experiment reads it
+          on init — if present, the variant is skipped entirely and the experiment classes are removed from
+          <code>&lt;html&gt;</code>. This keeps logged-in users on their existing experience (where trade
+          pricing is already default) and ensures the analytics segment matches the test population the brief
+          intended.
+        </p>
+      </section>
 
-            <pre class="case-study__code"><code class="language-javascript">const isLoggedIn = () =&gt; !!getCookie('access_token');
+      <pre class="case-study__code"><code class="language-javascript">const isLoggedIn = () =&gt; !!getCookie('access_token');
 const isPlp = () =&gt; window.location.href.includes('/c/');
 const isPdp = () =&gt; window.location.href.includes('/p/');
 
@@ -151,17 +152,18 @@ const init = () =&gt; {
   // ...continue with experiment setup
 };</code></pre>
 
-            <section class="case-study__section">
-                <h3>Clone-and-replace pattern for price elements</h3>
-                <p>Rather than re-rendering the price section from scratch (and risking loss of the host's bound event
-                    handlers, accessibility attributes, and any other behaviour attached to the elements), the
-                    experiment clones the existing retail-price element, adds a class for trade-price styling, and slots
-                    both the clone and a new price banner around the originals. The originals are hidden with
-                    <code>display: none</code> rather than removed — keeps the host's React tree intact, avoids
-                    reconciliation glitches.</p>
-            </section>
+      <section class="case-study__section">
+        <h3>Clone-and-replace pattern for price elements</h3>
+        <p>Rather than re-rendering the price section from scratch (and risking loss of the host's bound event
+          handlers, accessibility attributes, and any other behaviour attached to the elements), the
+          experiment clones the existing retail-price element, adds a class for trade-price styling, and slots
+          both the clone and a new price banner around the originals. The originals are hidden with
+          <code>display: none</code> rather than removed — keeps the host's React tree intact, avoids
+          reconciliation glitches.
+        </p>
+      </section>
 
-            <pre class="case-study__code"><code class="language-javascript">// PDP — clone retail price, build banner, hide originals, slot in
+      <pre class="case-study__code"><code class="language-javascript">// PDP — clone retail price, build banner, hide originals, slot in
 const normalPriceElement = document.querySelector(
   '[data-test-id="best-price"] &gt; div:first-child'
 );
@@ -196,14 +198,14 @@ const bannerElement = document.querySelector(`.${ID}__prices-banner`);
 bannerElement.insertAdjacentElement('afterbegin', normalPriceClone);
 bannerElement.nextElementSibling.style.display = 'none';</code></pre>
 
-            <section class="case-study__section">
-                <h3>PLP grid — same pattern, applied per-card</h3>
-                <p>On PLPs, the same logic runs once per product card. A per-card duplicate-render guard prevents the
-                    banner from being injected twice when pagination loads new cards. The banner attaches before the
-                    existing trade-price element on each card, then hides the originals.</p>
-            </section>
+      <section class="case-study__section">
+        <h3>PLP grid — same pattern, applied per-card</h3>
+        <p>On PLPs, the same logic runs once per product card. A per-card duplicate-render guard prevents the
+          banner from being injected twice when pagination loads new cards. The banner attaches before the
+          existing trade-price element on each card, then hides the originals.</p>
+      </section>
 
-            <pre class="case-study__code"><code class="language-javascript">if (isPlp()) {
+      <pre class="case-study__code"><code class="language-javascript">if (isPlp()) {
   const prodCards = document.querySelectorAll('[data-test-id="product"]');
 
   prodCards.forEach((card) =&gt; {
@@ -236,16 +238,16 @@ bannerElement.nextElementSibling.style.display = 'none';</code></pre>
   });
 }</code></pre>
 
-            <section class="case-study__section">
-                <h3>Embedded login via the host's own identity SDK</h3>
-                <p>The login modal doesn't ship its own form — instead, it calls <code>window.TP.renderLoginForm</code>,
-                    the host's existing identity component. This means the embedded form behaves identically to the
-                    site's native login: same validation, same SSO hooks, same error states, same post-login redirect
-                    handling. The experiment owns the modal chrome (overlay, close button, "create an account" CTA) but
-                    leaves authentication logic entirely to the host.</p>
-            </section>
+      <section class="case-study__section">
+        <h3>Embedded login via the host's own identity SDK</h3>
+        <p>The login modal doesn't ship its own form — instead, it calls <code>window.TP.renderLoginForm</code>,
+          the host's existing identity component. This means the embedded form behaves identically to the
+          site's native login: same validation, same SSO hooks, same error states, same post-login redirect
+          handling. The experiment owns the modal chrome (overlay, close button, "create an account" CTA) but
+          leaves authentication logic entirely to the host.</p>
+      </section>
 
-            <pre class="case-study__code"><code class="language-javascript">// Build modal shell — overlay + container + close + login slot
+      <pre class="case-study__code"><code class="language-javascript">// Build modal shell — overlay + container + close + login slot
 const modal = document.createElement('div');
 modal.id = `${ID}__modal`;
 modal.classList.add(`${ID}__hidden`);
@@ -270,15 +272,15 @@ if (!document.getElementById(`${ID}__modal`)) {
   }
 }</code></pre>
 
-            <section class="case-study__section">
-                <h3>Page-aware event tracking</h3>
-                <p>Every modal interaction fires events with the page context appended (PDP, PLP, or Other). That gives
-                    analysts a single event family with consistent labelling, while preserving the per-page breakdown
-                    they need for the secondary metrics: pop-up triggers, dismissals, sign-ins, and account-creation
-                    clicks all tagged by where they happened.</p>
-            </section>
+      <section class="case-study__section">
+        <h3>Page-aware event tracking</h3>
+        <p>Every modal interaction fires events with the page context appended (PDP, PLP, or Other). That gives
+          analysts a single event family with consistent labelling, while preserving the per-page breakdown
+          they need for the secondary metrics: pop-up triggers, dismissals, sign-ins, and account-creation
+          clicks all tagged by where they happened.</p>
+      </section>
 
-            <pre class="case-study__code"><code class="language-javascript">document.body.addEventListener('click', (e) =&gt; {
+      <pre class="case-study__code"><code class="language-javascript">document.body.addEventListener('click', (e) =&gt; {
   const { target } = e;
   const pageType = isPdp() ? 'PDP' : isPlp() ? 'PLP' : 'Other';
 
@@ -296,16 +298,17 @@ if (!document.getElementById(`${ID}__modal`)) {
   }
 });</code></pre>
 
-            <section class="case-study__section">
-                <h3>SPA-aware re-init for paginated PLPs</h3>
-                <p>The host's PLP pagination doesn't trigger a full page load — it re-renders the product grid in place.
-                    The experiment listens for clicks on the host's pagination button
-                    (<code>[data-test-id="pag-button"]</code>), then re-runs init after a delay so the new product cards
-                    have time to render. The same delay handles SPA route changes more broadly via
-                    <code>onUrlChange</code>.</p>
-            </section>
+      <section class="case-study__section">
+        <h3>SPA-aware re-init for paginated PLPs</h3>
+        <p>The host's PLP pagination doesn't trigger a full page load — it re-renders the product grid in place.
+          The experiment listens for clicks on the host's pagination button
+          (<code>[data-test-id="pag-button"]</code>), then re-runs init after a delay so the new product cards
+          have time to render. The same delay handles SPA route changes more broadly via
+          <code>onUrlChange</code>.
+        </p>
+      </section>
 
-            <pre class="case-study__code"><code class="language-javascript">// Re-init on pagination click — host re-renders cards in place
+      <pre class="case-study__code"><code class="language-javascript">// Re-init on pagination click — host re-renders cards in place
 document.body.addEventListener('click', (e) =&gt; {
   if (e.target.closest('[data-test-id="pag-button"]')) {
     setTimeout(init, DOM_RENDER_DELAY);
@@ -319,61 +322,63 @@ onUrlChange(() =&gt; {
   });
 });</code></pre>
 
-            <section class="case-study__section">
-                <h2>Acceptance criteria</h2>
-                <ul class="case-study__list">
-                    <li>Test runs on desktop, tablet, and mobile</li>
-                    <li>Targets PDP and PLP pages only</li>
-                    <li>One variation against control</li>
-                    <li>Excluded audience: users signed in to an account (cookie-based check)</li>
-                    <li>Trade price banner replaces the host's separate trade-price block</li>
-                    <li>Retail and trade prices appear at equal visual weight, side-by-side</li>
-                    <li>Yellow "Save with a Trade account" badge appears beneath the banner</li>
-                    <li>Banner click opens a modal with embedded login form (via host SDK) plus signup link</li>
-                    <li>Modal closes on X click, overlay click, and post-login navigation</li>
-                    <li>Recommended runtime: 30 days</li>
-                </ul>
-            </section>
+      <section class="case-study__section">
+        <h2>Acceptance criteria</h2>
+        <ul class="case-study__list">
+          <li>Test runs on desktop, tablet, and mobile</li>
+          <li>Targets PDP and PLP pages only</li>
+          <li>One variation against control</li>
+          <li>Excluded audience: users signed in to an account (cookie-based check)</li>
+          <li>Trade price banner replaces the host's separate trade-price block</li>
+          <li>Retail and trade prices appear at equal visual weight, side-by-side</li>
+          <li>Yellow "Save with a Trade account" badge appears beneath the banner</li>
+          <li>Banner click opens a modal with embedded login form (via host SDK) plus signup link</li>
+          <li>Modal closes on X click, overlay click, and post-login navigation</li>
+          <li>Recommended runtime: 30 days</li>
+        </ul>
+      </section>
 
-            <section class="case-study__section">
-                <h2>Success metrics</h2>
-                <p>Primary metric: <strong>trade account creations</strong>. Secondary: add-to-bag rate, conversion
-                    rate, AOV, items per order, pages viewed in journey, PLP views, PDP views, bag views, checkout
-                    progression. Stakeholder questions to investigate post-test: where in the journey do users most
-                    likely create a trade account, how does the test impact that, are users adding to bag before
-                    creating an account, are users abandoning bag without account creation (suggesting confusion), and
-                    on the variant — are users opening the pop-up by mistake and going back, or are they engaging
-                    genuinely.</p>
-            </section>
+      <section class="case-study__section">
+        <h2>Success metrics</h2>
+        <p>Primary metric: <strong>trade account creations</strong>. Secondary: add-to-bag rate, conversion
+          rate, AOV, items per order, pages viewed in journey, PLP views, PDP views, bag views, checkout
+          progression. Stakeholder questions to investigate post-test: where in the journey do users most
+          likely create a trade account, how does the test impact that, are users adding to bag before
+          creating an account, are users abandoning bag without account creation (suggesting confusion), and
+          on the variant — are users opening the pop-up by mistake and going back, or are they engaging
+          genuinely.</p>
+      </section>
 
-            <section class="case-study__section">
-                <h2>Strategic context</h2>
-                <p>The previous account-creation test had succeeded by promoting the cheaper price, but the journey
-                    context was different — prices were already physically separated on the page in the current build,
-                    making comparison hard. This test isolates the impact of <em>visual prominence and proximity</em>
-                    from the impact of price-cut messaging itself. A win here validates the design hypothesis that
-                    comparable prices need to be physically comparable, not just numerically present.</p>
-            </section>
+      <section class="case-study__section">
+        <h2>Strategic context</h2>
+        <p>The previous account-creation test had succeeded by promoting the cheaper price, but the journey
+          context was different — prices were already physically separated on the page in the current build,
+          making comparison hard. This test isolates the impact of <em>visual prominence and proximity</em>
+          from the impact of price-cut messaging itself. A win here validates the design hypothesis that
+          comparable prices need to be physically comparable, not just numerically present.</p>
+      </section>
 
-            <section class="case-study__section">
-                <h2>Post-test analysis</h2>
-                <p class="case-study__placeholder">Results pending. This section will be updated with anonymised outcome
-                    highlights once the analysis is published and approved for share.</p>
-            </section>
+      <section class="case-study__section post-test-analysis">
+        <h2>Post-test analysis</h2>
+        <p class="case-study__placeholder">Results pending. This section will be updated with anonymised outcome
+          highlights once the analysis is published and approved for share.</p>
+      </section>
 
-            <a href="/#work"
-               class="case-study__back">← Back to all work</a>
-        </div>
-    </main>
+      <a href="/#work"
+         class="case-study__back">← Back to all work</a>
+    </div>
+  </main>
 
-    <footer class="site-footer">
-        <div class="container">
-            <p>© 2026 Arafat. Freelance CRO developer.</p>
-        </div>
-    </footer>
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 Arafat. Freelance CRO developer.</p>
+    </div>
+  </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <link rel="stylesheet"
+        href="/vendor/prism-onedarkpro.css" />
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </body>
 
 </html>

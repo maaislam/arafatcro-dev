@@ -7,8 +7,7 @@
 
       <title>Arafat — Freelance CRO Developer | Convert, Optimizely, Adobe Target</title>
       <meta name="description"
-            content="Freelance CRO developer building client-side A/B tests on Convert.com, Optimizely, Adobe Target, Dynamic Yield, and Monetate. Experiments shipped for Screwfix, S&P Global, Howdens, Travis Perkins, Avon, and others." />
-
+            content="Freelance CRO developer building client-side A/B tests on Convert.com, Optimizely, Adobe Target, Dynamic Yield, Monetate, VWO, and Intelligems. Experiments shipped for Screwfix, S&P Global, Howdens, Travis Perkins, Avon, and others." />
       <!-- Open Graph -->
       <meta property="og:type"
             content="website" />
@@ -40,7 +39,7 @@
             href="https://fonts.gstatic.com"
             crossorigin />
       <link rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" />
 
       <script type="module"
               src="/src/scripts/main.js"></script>
@@ -69,9 +68,9 @@
                                     production.</span>
                         </h1>
                         <p class="hero__lede">
-                              Convert.com, Optimizely, Adobe Target, Dynamic Yield, Monetate. I build experiments that
-                              hold up to engineering review, accessibility audits, and SPA edge cases — for retailers,
-                              builders' merchants, insurers, and DTC brands.
+                              Convert, Optimizely, Adobe Target, Dynamic Yield, Monetate, VWO, and Intelligems for
+                              Shopify. I build experiments that hold up to engineering review, accessibility audits, and
+                              SPA edge cases — for retailers, builders' merchants, insurers, and DTC brands.
                         </p>
                         <p class="hero__credibility">
                               Available for direct work and as overflow dev capacity for CRO agencies. Active
@@ -264,36 +263,50 @@
 
                               <div class="how-i-work__item">
                                     <h3>Stack</h3>
-                                    <p>Vanilla ES6 IIFEs, BEM-scoped SCSS, custom DOM polling utility for late-rendering
-                                          elements, <code>MutationObserver</code> and <code>IntersectionObserver</code>
-                                          for SPA-aware behaviour. Comfortable with React-aware DOM updates (native
-                                          input descriptor patterns), focus-trap implementations with
-                                          <code>AbortController</code> cleanup, and ARIA-compliant component patterns.
-                                    </p>
+                                    <ul class="how-i-work__list">
+                                          <li>Vanilla ES6 IIFEs, BEM-scoped SCSS</li>
+                                          <li>Custom DOM polling utility for late-rendering elements</li>
+                                          <li><code>MutationObserver</code> and <code>IntersectionObserver</code> for
+                                                SPA-aware behaviour</li>
+                                          <li>React-aware DOM updates (native input descriptor patterns)</li>
+                                          <li>Focus-trap implementations with <code>AbortController</code> cleanup</li>
+                                          <li>ARIA-compliant component patterns</li>
+                                    </ul>
                               </div>
 
                               <div class="how-i-work__item">
                                     <h3>Platforms</h3>
-                                    <p>Convert.com, Optimizely Web, Adobe Target, Dynamic Yield, Monetate. Comfortable
-                                          integrating with Tealium, GA4, Adobe Analytics, AEM Experience Fragments, and
-                                          most consent management providers. Familiar with Magento, Shopify, and Next.js
+                                    <ul class="how-i-work__list">
+                                          <li>Convert.com, Optimizely Web, Adobe Target</li>
+                                          <li>Dynamic Yield, Monetate, VWO</li>
+                                          <li>Intelligems for Shopify-native testing</li>
+                                          <li>AEM Experience Fragments</li>
+                                    </ul>
+                                    <p class="how-i-work__note">Comfortable with Tealium, GA4, Adobe Analytics, and most
+                                          consent management providers. Familiar with Magento, Shopify Plus, and Next.js
                                           host stacks.</p>
                               </div>
 
                               <div class="how-i-work__item">
                                     <h3>QA &amp; quality bar</h3>
-                                    <p>Self-QA every variant across browsers and devices. Accessibility checks — focus
-                                          order, keyboard parity, ARIA semantics, screen-reader sanity — before
-                                          handover. Code reviewed against client engineering conventions where they
-                                          exist; written to pass review where they don't.</p>
+                                    <ul class="how-i-work__list">
+                                          <li>Self-QA every variant across browsers and devices</li>
+                                          <li>Accessibility checks before handover — focus order, keyboard parity, ARIA
+                                                semantics, screen-reader sanity</li>
+                                          <li>Code reviewed against client engineering conventions where they exist</li>
+                                          <li>Written to pass review where they don't</li>
+                                    </ul>
                               </div>
 
                               <div class="how-i-work__item">
                                     <h3>Engagement</h3>
-                                    <p>Direct with brands or as overflow capacity for CRO agencies. Available for short
-                                          sprints, retained capacity, or one-off complex builds. Async-first, UK and US
-                                          business hours covered. Plain communication for non-technical stakeholders
-                                          when it's needed; engineering-grade detail when it's required.</p>
+                                    <ul class="how-i-work__list">
+                                          <li>Direct with brands or as overflow capacity for CRO agencies</li>
+                                          <li>Short sprints, retained capacity, or one-off complex builds</li>
+                                          <li>Async-first; UK and US business hours covered</li>
+                                          <li>Plain communication for non-technical stakeholders; engineering-grade
+                                                detail when required</li>
+                                    </ul>
                               </div>
 
                         </div>
@@ -313,11 +326,16 @@
                               <strong>National Scrap Car</strong>, and others.
                         </p>
 
+                        <p class="clients__shopify">
+                              Including Shopify Plus DTC brands such as <strong>Dr. Woof Apparel</strong> and
+                              <strong>VitaHustle</strong> — built with Intelligems for native Shopify experimentation,
+                              plus custom client-side patterns for cart, PDP, and search components.
+                        </p>
+
                         <p class="clients__partners">
                               Active agency and direct partnerships with <strong>Brainlabs</strong>,
-                              <strong>BrowserToBuyer</strong>, <strong>Raketech</strong>,
-                              <strong>MoreConversion</strong>,
-                              <strong>Convertex</strong>, and <strong>FunnelEnvy</strong>.
+                              <strong>FunnelEnvy</strong>, <strong>Raketech</strong>, <strong>MoreConversion</strong>,
+                              <strong>Convertex</strong>, and <strong>BrowserToBuyer</strong>.
                         </p>
                   </div>
             </section>

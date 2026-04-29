@@ -1,6 +1,8 @@
 @use '../abstracts/variables' as *;
 
 .case-study {
+  // === LAYOUT ===
+
   &__main {
     padding-block: $space-7 $space-9;
   }
@@ -11,6 +13,7 @@
     font-size: $fs-sm;
     font-family: $font-mono;
     margin-bottom: $space-6;
+    transition: color $transition-fast;
 
     &:hover {
       color: $color-accent;
@@ -23,13 +26,14 @@
     border-bottom: 1px solid $color-border;
   }
 
+  // === META ROW (ID + platform + client) ===
+
   &__meta {
     display: flex;
     align-items: center;
     gap: $space-3;
     font-family: $font-mono;
     font-size: $fs-xs;
-    color: $color-text-dim;
     margin-bottom: $space-4;
     flex-wrap: wrap;
   }
@@ -37,6 +41,7 @@
   &__id {
     color: $color-accent;
     font-weight: 500;
+    letter-spacing: 0.02em;
   }
 
   &__platform,
@@ -45,7 +50,82 @@
     background: $color-bg-elevated;
     border: 1px solid $color-border;
     border-radius: $radius-sm;
+    font-weight: 500;
+    letter-spacing: 0.01em;
   }
+
+  // Platform brand colors
+  &__platform {
+    &--optimizely {
+      background: $platform-optimizely;
+      color: #fff;
+    }
+
+    &--convert {
+      background: $platform-convert;
+      color: #fff;
+    }
+
+    &--adobe-target {
+      background: $platform-adobe-target;
+      color: #fff;
+    }
+
+    &--dynamic-yield {
+      background: $platform-dynamic-yield;
+      color: #fff;
+    }
+
+    &--monetate {
+      background: $platform-monetate;
+      color: #fff;
+    }
+
+    &--webtrends {
+      background: $platform-webtrends;
+      color: #fff;
+    }
+  }
+
+  // Client brand colors
+  &__client-tag {
+    &--screwfix {
+      background: $brand-screwfix;
+      color: #fff;
+    }
+
+    &--luxury-flooring {
+      background: $brand-luxury-flooring;
+      color: #fff;
+    }
+
+    &--homeserve {
+      background: $brand-homeserve;
+      color: #fff;
+    }
+
+    &--avon {
+      background: $brand-avon;
+      color: #fff;
+    }
+
+    &--travis-perkins {
+      background: $brand-travis-perkins;
+      color: #fff;
+    }
+
+    &--sp-global {
+      background: $brand-sp-global;
+      color: #fff;
+    }
+
+    &--howdens {
+      background: $brand-howdens;
+      color: #fff;
+    }
+  }
+
+  // === HEADER CONTENT ===
 
   &__lede {
     font-size: $fs-md;
@@ -55,14 +135,34 @@
     line-height: 1.6;
   }
 
+  &__hero-image {
+    margin-block: $space-6 $space-7;
+    &.hs {
+      width: 300px;
+    }
+
+    img {
+      width: 100%;
+      border-radius: $radius-lg;
+      border: 1px solid $color-border;
+    }
+  }
+
+  // === CONTENT SECTIONS ===
+
   &__section {
     margin-bottom: $space-7;
     max-width: 70ch;
+
+    &.post-test-analysis {
+      display: none;
+    }
 
     h2 {
       font-size: $fs-lg;
       margin-bottom: $space-4;
     }
+
     h3 {
       font-size: $fs-md;
       margin-block: $space-5 $space-3;
@@ -92,6 +192,43 @@
     }
   }
 
+  // === FIGURES (per-section images) ===
+
+  &__figure {
+    margin-block: $space-6;
+
+    img {
+      width: 100%;
+      border-radius: $radius-md;
+      border: 1px solid $color-border;
+      background: $color-bg-elevated;
+    }
+
+    figcaption {
+      margin-top: $space-3;
+      font-size: $fs-sm;
+      color: $color-text-dim;
+      font-style: italic;
+      text-align: center;
+    }
+  }
+
+  &__figure-grid {
+    display: grid;
+    gap: $space-4;
+    margin-block: $space-6;
+
+    @media (min-width: $bp-md) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    figure {
+      margin: 0;
+    }
+  }
+
+  // === QUOTES & PLACEHOLDERS ===
+
   &__quote {
     font-size: $fs-md;
     line-height: 1.6;
@@ -102,23 +239,6 @@
     font-style: italic;
   }
 
-  &__code {
-    background: $color-code-bg;
-    border: 1px solid $color-border;
-    border-radius: $radius-md;
-    padding: $space-4;
-    overflow-x: auto;
-    margin-block: $space-4;
-
-    code {
-      background: none;
-      border: none;
-      padding: 0;
-      font-size: $fs-xs;
-      line-height: 1.6;
-      color: $color-text;
-    }
-  }
   &__placeholder {
     display: inline-block;
     padding: $space-3 $space-4;
@@ -128,5 +248,25 @@
     color: $color-text-muted;
     font-size: $fs-sm;
     font-style: italic;
+  }
+
+  // === CODE BLOCKS ===
+
+  &__code {
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    margin-block: $space-4;
+    font-size: $fs-xs;
+    overflow-x: auto;
+
+    // Background, padding, and font come from Prism theme
+  }
+
+  &__code-caption {
+    font-size: $fs-xs;
+    color: $color-text-dim;
+    font-family: $font-mono;
+    margin-top: -$space-2;
+    margin-bottom: $space-3;
   }
 }

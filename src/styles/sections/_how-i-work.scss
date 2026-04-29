@@ -1,12 +1,12 @@
 @use '../abstracts/variables' as *;
 
 .how-i-work {
-  padding-block: $space-6;
+  padding-block: $space-7;
   border-top: 1px solid $color-border;
 
   &__grid {
     display: grid;
-    gap: $space-6;
+    gap: $space-7;
     grid-template-columns: 1fr;
 
     @media (min-width: $bp-md) {
@@ -17,14 +17,48 @@
   &__item {
     h3 {
       font-size: $fs-md;
-      margin-bottom: $space-3;
+      margin-bottom: $space-4;
       color: $color-text;
     }
+  }
 
-    p {
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      position: relative;
+      padding-left: $space-5;
       font-size: $fs-sm;
       color: $color-text-muted;
-      line-height: 1.7;
+      line-height: 1.6;
+      margin-bottom: $space-3;
+      text-wrap: pretty;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0.65em;
+        width: 6px;
+        height: 1px;
+        background: $color-accent;
+      }
+
+      code {
+        font-size: 0.9em;
+      }
     }
+  }
+
+  &__note {
+    margin-top: $space-4;
+    padding-top: $space-4;
+    border-top: 1px solid $color-border;
+    font-size: $fs-xs;
+    color: $color-text-dim;
+    line-height: 1.6;
+    text-wrap: pretty;
   }
 }

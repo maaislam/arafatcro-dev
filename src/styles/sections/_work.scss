@@ -1,5 +1,10 @@
 @use '../abstracts/variables' as *;
 
+.work {
+  padding-block: $space-7;
+  border-top: 1px solid $color-border;
+}
+
 .hero {
   // padding-block: $space-10 $space-9;
 

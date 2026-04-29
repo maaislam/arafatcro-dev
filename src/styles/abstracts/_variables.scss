@@ -17,7 +17,7 @@ $font-sans:
   BlinkMacSystemFont,
   'Segoe UI',
   sans-serif;
-$font-mono: 'JetBrains Mono', 'Menlo', 'Monaco', monospace;
+$font-mono: 'Fira Code', 'Menlo', 'Monaco', monospace;
 
 $fs-xs: 0.8125rem;
 $fs-sm: 0.9375rem;
@@ -64,3 +64,13 @@ $platform-convert: #ff6b35;
 $platform-adobe-target: #fa0f00;
 $platform-dynamic-yield: #0099ff;
 $platform-monetate: #00b5a4;
+$platform-webtrends: #00a3e0; // Webtrends Optimize signature blue
+
+// Brand colors (case study client tags)
+$brand-screwfix: #003d6a; // Screwfix navy blue
+$brand-luxury-flooring: #6b8e6f; // Luxury Flooring sage green
+$brand-homeserve: #00b894; // HomeServe teal
+$brand-avon: #d9006d; // Avon pink/magenta
+$brand-travis-perkins: #00853e; // Travis Perkins green
+$brand-sp-global: #e6212a; // S&P Global red (for future)
+$brand-howdens: #e2231a; // Howdens red (for future)
