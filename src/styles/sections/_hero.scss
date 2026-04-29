@@ -1,7 +1,7 @@
 @use '../abstracts/variables' as *;
 
 .hero {
-  padding-block: $space-10 $space-9;
+  padding-block: $space-7 $space-7;
 
   &__title {
     margin-bottom: $space-5;
@@ -27,5 +27,12 @@
     color: $color-text-dim;
     max-width: 60ch;
     margin-bottom: $space-6;
+  }
+
+  &__ctas {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    flex-wrap: wrap;
   }
 }

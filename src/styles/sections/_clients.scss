@@ -4,10 +4,28 @@
   padding-block: $space-9;
   border-top: 1px solid $color-border;
 
-  &__list {
+  &__brands {
     font-size: $fs-md;
     color: $color-text-muted;
     line-height: 1.7;
     max-width: 70ch;
+    margin-bottom: $space-4;
+
+    strong {
+      color: $color-text;
+      font-weight: 600;
+    }
+  }
+
+  &__partners {
+    font-size: $fs-sm;
+    color: $color-text-dim;
+    line-height: 1.7;
+    max-width: 70ch;
+
+    strong {
+      color: $color-text-muted;
+      font-weight: 500;
+    }
   }
 }

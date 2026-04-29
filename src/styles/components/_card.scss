@@ -4,6 +4,7 @@
   background: $color-bg-elevated;
   border: 1px solid $color-border;
   border-radius: $radius-lg;
+  margin-bottom: $space-6;
   padding: $space-5;
   display: flex;
   flex-direction: column;
@@ -36,6 +37,36 @@
     background: $color-bg;
     border: 1px solid $color-border;
     border-radius: $radius-sm;
+
+    &--optimizely {
+      background: $platform-optimizely;
+      color: #fff;
+      border-color: $platform-optimizely;
+    }
+
+    &--convert {
+      background: $platform-convert;
+      color: #fff;
+      border-color: $platform-convert;
+    }
+
+    &--adobe-target {
+      background: $platform-adobe-target;
+      color: #fff;
+      border-color: $platform-adobe-target;
+    }
+
+    &--dynamic-yield {
+      background: $platform-dynamic-yield;
+      color: #fff;
+      border-color: $platform-dynamic-yield;
+    }
+
+    &--monetate {
+      background: $platform-monetate;
+      color: #fff;
+      border-color: $platform-monetate;
+    }
   }
 
   &__title {
